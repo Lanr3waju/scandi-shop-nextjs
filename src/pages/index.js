@@ -1,7 +1,12 @@
-export default function Homepage() {
+import Head from "next/head"
+
+export default function CategoryPage() {
   return (
-    <div>
-      Homepage
-    </div>
+    <>
+      <Head>
+        <title>Listing Page</title>
+      </Head>
+      CategoryPage
+    </>
   )
 }
