@@ -1,11 +1,14 @@
 import '@/styles/globals.css'
 import Header from '@/components/layout/Header'
+import Context from '@/components/context/context'
 
-export default function App({ Component, pageProps }) {
+export default function App({Component, pageProps}) {
   return (
     <>
-      <Header />
-      <Component {...pageProps} />
+      <Context>
+        <Header />
+        <Component {...pageProps} />
+      </Context>
     </>
   )
 }
