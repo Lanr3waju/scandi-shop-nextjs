@@ -13,7 +13,7 @@ function Header() {
 
     const handleCategoryFilter = (nav) => {
         setCategoryFilter(nav)
-        Router.push(`/category?filter=${ nav }`, undefined, {shallow: true})
+        Router.push(`/categories?filter=${ nav }`, undefined, {shallow: true})
     }
 
     return (
