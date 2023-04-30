@@ -17,15 +17,19 @@ function Header() {
     }
 
     return (
-        <ul className=' bg-black flex p-4 mb-4 text-white text-xl font-bold'>
-            {categories.map((category) => {
-                return (
-                    <li key={category}>
-                        <button type='button' onClick={() => handleCategoryFilter(category)} className={`m-4 ${ category === filterState && `bg-green-500` }`}>{category}</button>
-                    </li>
-                )
-            })}
-        </ul>
+        <header className='sticky top-0 border-t-4 border-primary bg-white w-full'>
+            <nav>
+                <ul className='flex p-4 mb-4 font-Raleway text-text'>
+                    {categories.map((category) => {
+                        return (
+                            <li key={category}>
+                                <button type='button' onClick={() => handleCategoryFilter(category)} className={`py-2 mx-5 uppercase ${ category === filterState && `border-b-2 border-primary text-primary` }`}>{category}</button>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </nav>
+        </header>
     )
 }
 
