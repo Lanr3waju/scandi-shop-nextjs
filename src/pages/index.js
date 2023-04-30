@@ -1,4 +1,4 @@
-import Head from "next/head"
+import Head from 'next/head';
 
 export default function CategoryPage() {
   return (
@@ -8,5 +8,5 @@ export default function CategoryPage() {
       </Head>
       CategoryPage
     </>
-  )
+  );
 }

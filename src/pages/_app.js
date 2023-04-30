@@ -1,5 +1,5 @@
-import '@/styles/globals.css'
-import Header from '@/components/layout/Header'
+import '@/styles/globals.css';
+import Header from '@/components/layout/Header.js';
 
 export default function App({ Component, pageProps }) {
   return (
@@ -7,5 +7,5 @@ export default function App({ Component, pageProps }) {
       <Header />
       <Component {...pageProps} />
     </>
-  )
+  );
 }
