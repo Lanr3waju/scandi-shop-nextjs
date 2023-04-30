@@ -15,5 +15,5 @@ export default function Homepage() {
       </Head>
       Redirecting to product categories
     </>
-  )
+  );
 }
