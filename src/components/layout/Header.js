@@ -1,27 +1,27 @@
 import store from '../../../data/store.json'
-import {useContext, useEffect} from 'react'
-import {Category_filter} from '@/context/context'
-import Router from 'next/router'
+import {useEffect, useState} from 'react'
+import {useRouter} from 'next/router'
+
+export const categories = store.data.categories.map((category) => category.name)
 
 function Header() {
-    const navs = store.data.categories.map((category) => category.name)
-    const {categoryFilter, setCategoryFilter} = useContext(Category_filter)
-    console.log(categoryFilter)
-    useEffect(() => {
-        setCategoryFilter(navs[ 0 ])
-    }, [])
+    const router = useRouter()
+    const [ filterState, setFilterState ] = useState(categories[ 0 ])
 
-    const handleCategoryFilter = (nav) => {
-        setCategoryFilter(nav)
-        Router.push(`/categories?filter=${ nav }`, undefined, {shallow: true})
+    useEffect(() => {
+        setFilterState(router.query.filter)
+    }, [ router.query.filter ])
+
+    const handleCategoryFilter = (category) => {
+        router.push(`/categories?filter=${ category }`, undefined, {shallow: true})
     }
 
     return (
         <ul className=' bg-black flex p-4 mb-4 text-white text-xl font-bold'>
-            {navs.map((nav) => {
+            {categories.map((category) => {
                 return (
-                    <li key={nav}>
-                        <button type='button' onClick={() => handleCategoryFilter(nav)} className={`m-4 ${ nav === categoryFilter && `bg-green-500` }`}>{nav}</button>
+                    <li key={category}>
+                        <button type='button' onClick={() => handleCategoryFilter(category)} className={`m-4 ${ category === filterState && `bg-green-500` }`}>{category}</button>
                     </li>
                 )
             })}

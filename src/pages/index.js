@@ -1,12 +1,19 @@
 import Head from "next/head"
+import {useRouter} from "next/router"
+import {categories} from "@/components/layout/Header"
+import {useEffect} from "react"
 
-export default function CategoryPage() {
+export default function Homepage() {
+  const router = useRouter()
+  useEffect(() => {
+    router.push(`/categories?filter=${ categories[ 0 ] }`)
+  }, [])
   return (
     <>
       <Head>
-        <title>Home Page</title>
+        <title>Homepage</title>
       </Head>
-      Home
+      Redirecting to product categories
     </>
   )
 }
