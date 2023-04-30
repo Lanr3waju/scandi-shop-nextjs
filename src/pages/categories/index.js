@@ -11,8 +11,8 @@ export default function Categories() {
             <Head>
                 <title>Product Listing Page</title>
             </Head>
-            {router.query.filter}
-            <main className="text-center font-Raleway">
+            <main className="px-20 font-Raleway mt-8">
+                <h2 className="capitalize text-text text-3xl my-14">{router.query.filter}</h2>
                 <Category store={filteredCategory} />
             </main>
         </>

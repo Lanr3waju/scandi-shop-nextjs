@@ -1,10 +1,8 @@
-import {useRouter} from "next/router"
 import Image from "next/image"
 
 export default function Category({store}) {
-    const router = useRouter()
     return (
-        <ul className="flex flex-wrap justify-evenly">
+        <ul className="flex flex-wrap justify-between w-full">
             {store?.products.map((product) => {
                 return (
                     <li key={product.id} className="min-w-[386px] min-h-[444px]">
