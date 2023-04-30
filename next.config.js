@@ -8,7 +8,7 @@ const nextConfig = {
         hostname: '**.com',
       },
     ],
-  }
-}
+  },
+};
 
 module.exports = nextConfig;

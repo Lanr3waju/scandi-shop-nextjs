@@ -14,14 +14,14 @@ module.exports = {
       },
     },
     fontFamily: {
-      'Raleway': 'Raleway, sans-serif',
+      Raleway: 'Raleway, sans-serif',
     },
     colors: {
-      'white': '#fff',
-      'primary': '#5ECE7B',
-      'text': '#1D1F22',
-      'light': '#a7fabd',
-      'dark': '#2f613c'
+      white: '#fff',
+      primary: '#5ECE7B',
+      text: '#1D1F22',
+      light: '#a7fabd',
+      dark: '#2f613c',
     },
   },
   plugins: [],

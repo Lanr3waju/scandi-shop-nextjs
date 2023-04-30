@@ -1,13 +1,13 @@
-import Head from "next/head"
-import {useRouter} from "next/router"
-import {categories} from "@/components/layout/Header"
-import {useEffect} from "react"
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { categories } from '@/components/layout/Header';
 
 export default function Homepage() {
-  const router = useRouter()
+  const router = useRouter();
   useEffect(() => {
-    router.push(`/categories?filter=${ categories[ 0 ] }`)
-  }, [])
+    router.push(`/categories?filter=${categories[0]}`);
+  }, []);
   return (
     <>
       <Head>

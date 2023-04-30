@@ -1,10 +1,10 @@
 import '@/styles/globals.css';
 import Header from '@/components/layout/Header.js';
 
-export default function App({Component, pageProps}) {
+export default function App({ Component, pageProps }) {
   return (
     <>
-        <Header />
+      <Header />
       <Component {...pageProps} />
     </>
   );
