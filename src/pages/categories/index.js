@@ -8,6 +8,13 @@ export default function Categories() {
   const filteredCategory = store.data.categories.find(
     ({ name }) => name === router.query.filter,
   );
+
+  if (router.query.filter !== filteredCategory?.name) {
+    return (
+      <h2>Not Available Yet</h2>
+    )
+  }
+
   return (
     <>
       <Head>

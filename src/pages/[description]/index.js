@@ -6,7 +6,7 @@ export default function DescriptionPage() {
       <Head>
         <title>Description Page</title>
       </Head>
-      Description
+      <h1>Description</h1>
     </div>
   );
 }
