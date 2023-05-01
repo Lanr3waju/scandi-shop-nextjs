@@ -1,4 +1,4 @@
-name: ESLint Pull
+name: ESLint pull
 
 on: pull_request
 
@@ -19,4 +19,4 @@ jobs:
         run: |
           npm install
       - name: ESLint Report
-        run: npm run lint:check
+        run: npm run lint
