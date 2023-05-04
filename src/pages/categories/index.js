@@ -1,18 +1,16 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import store from '../../../data/store.json';
-import Category from '@/components/Category';
+import Head from "next/head";
+import { useRouter } from "next/router";
+import store from "../../../data/store.json";
+import Category from "@/components/Category";
 
 export default function Categories() {
   const router = useRouter();
   const filteredCategory = store.data.categories.find(
-    ({ name }) => name === router.query.filter,
+    ({ name }) => name === router.query.filter
   );
 
   if (router.query.filter !== filteredCategory?.name) {
-    return (
-      <h2>Not Available Yet</h2>
-    )
+    return <h2>Not Available Yet</h2>;
   }
 
   return (

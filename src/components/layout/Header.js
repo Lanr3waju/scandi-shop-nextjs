@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
-import Link from 'next/link';
-import store from '../../../data/store.json';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import Image from "next/image";
+import Link from "next/link";
+import store from "../../../data/store.json";
 
 export const categories = store.data.categories.map(
-  (category) => category.name,
+  (category) => category.name
 );
 
 function Header() {
@@ -24,10 +24,14 @@ function Header() {
             <li key={category}>
               <button
                 type="button"
-                onClick={() => router.push(`/categories?filter=${category}`, undefined, { shallow: true })}
+                onClick={() =>
+                  router.push(`/categories?filter=${category}`, undefined, {
+                    shallow: true,
+                  })
+                }
                 className={`p-4 uppercase mr-4 ${
-                  category === filterState
-                    && 'border-b-2 border-primary text-primary'
+                  category === filterState &&
+                  "border-b-2 border-primary text-primary"
                 }`}
               >
                 {category}
