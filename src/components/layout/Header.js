@@ -16,10 +16,6 @@ function Header() {
     setFilterState(router.query.filter);
   }, [router.query.filter]);
 
-  const handleCategoryFilter = (category) => {
-    router.push(`/categories?filter=${category}`, undefined, { shallow: true });
-  };
-
   return (
     <header className="sticky top-0 border-t-4 border-primary bg-white w-full flex justify-between items-center px-20">
       <nav className="w-1/4">
@@ -28,7 +24,7 @@ function Header() {
             <li key={category}>
               <button
                 type="button"
-                onClick={() => handleCategoryFilter(category)}
+                onClick={() => router.push(`/categories?filter=${category}`, undefined, { shallow: true })}
                 className={`p-4 uppercase mr-4 ${
                   category === filterState
                     && 'border-b-2 border-primary text-primary'

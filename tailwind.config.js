@@ -22,6 +22,7 @@ module.exports = {
       text: '#1D1F22',
       light: '#a7fabd',
       dark: '#2f613c',
+      transparent: 'transparent'
     },
   },
   plugins: [],

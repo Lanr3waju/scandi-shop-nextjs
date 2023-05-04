@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Category({ store }) {
   return (
-    <ul className="flex flex-wrap justify-between w-full">
+    <ul className="flex flex-wrap justify-start w-full">
       {store?.products.map((product) => (
         <li key={product.id} className="min-w-[386px] min-h-[444px]">
           <h2>{product.name}</h2>
