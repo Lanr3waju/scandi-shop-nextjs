@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Head from "next/head";
 
 export default function DescriptionPage() {
   return (
@@ -6,7 +6,7 @@ export default function DescriptionPage() {
       <Head>
         <title>Description Page</title>
       </Head>
-      Description
+      <h1>Description</h1>
     </div>
   );
 }
