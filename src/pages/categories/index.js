@@ -7,7 +7,6 @@ import { useContext } from "react";
 
 
 export default function Categories() {
-  const { cartCurrencyOverlay } = useContext(Currency);
   const router = useRouter();
 
   const filteredCategory = store.data.categories.find(
@@ -25,7 +24,7 @@ export default function Categories() {
       <Head>
         <title>Product Listing Page</title>
       </Head>
-      <main className={`px-20 font-Raleway pt-8 transition-colors ${cartCurrencyOverlay && 'bg-overlay z-50'}`}>
+      <main className="px-20 font-Raleway pt-8 transition-colors">
         <h2 className="capitalize text-text text-3xl my-14">
           { router.query.filter }
         </h2>

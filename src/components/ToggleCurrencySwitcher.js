@@ -3,12 +3,12 @@ import { Currency } from "../../context/context";
 import { useContext } from "react";
 import CurrencySwitcher from "./CurrencySwitcher";
 
-export default function ToggleCurrencySwitcher() {
+export default function ToggleCurrencySwitcher({setOverlay}) {
     const [currencyState, setCurrencyState] = useState(false);
-    const { currency, setCartCurrencyOverlay } = useContext(Currency);
+    const { currency } = useContext(Currency);
 
     useEffect(() => {
-        setCartCurrencyOverlay(currencyState)
+        setOverlay(currencyState)
     }, [currencyState]);
     return (
         <>

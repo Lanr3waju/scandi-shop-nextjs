@@ -9,7 +9,7 @@ export const categories = store.data.categories.map(
   (category) => category.name
 );
 
-function Header() {
+function Header({setOverlay}) {
   const router = useRouter();
   const [filterState, setFilterState] = useState(categories[0]);
 
@@ -45,7 +45,7 @@ function Header() {
       </Link>
       <ul className="flex w-1/3 justify-end items-center">
         <li>
-          <ToggleCurrencySwitcher />
+          <ToggleCurrencySwitcher setOverlay={ setOverlay } />
         </li>
         <li>
           <Image

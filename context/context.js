@@ -6,10 +6,9 @@ export const Currency = createContext();
 
 function Context({ children }) {
     const [currency, setCurrency] = useState(initialCurrency);
-    const [cartCurrencyOverlay, setCartCurrencyOverlay] = useState(false);
 
     return (
-        <Currency.Provider value={ { currency, cartCurrencyOverlay, setCurrency, setCartCurrencyOverlay } }>
+        <Currency.Provider value={ { currency, setCurrency } }>
             { children }
         </Currency.Provider>
     );
