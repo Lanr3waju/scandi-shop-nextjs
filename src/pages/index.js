@@ -12,7 +12,7 @@ export default function Homepage() {
 
   const { products } = store.data.categories.find(({ name }) => name === "all");
 
-const renderSlides = products.map(({ gallery, name, id }) => (
+  const renderSlides = products.map(({ gallery, name, id }) => (
     <div key={id}>
       <img src={gallery[0]} alt={name} />
       <p>{name}</p>
@@ -22,8 +22,6 @@ const renderSlides = products.map(({ gallery, name, id }) => (
   function handleChange(index) {
     setCurrentIndex(index);
   }
-
-
 
   return (
     <>

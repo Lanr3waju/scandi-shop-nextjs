@@ -2,9 +2,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import store from "../../../data/store.json";
 import Category from "@/components/Category";
-import { Currency} from "../../../context/context";
-import { useContext } from "react";
-
 
 export default function Categories() {
   const router = useRouter();
@@ -13,11 +10,9 @@ export default function Categories() {
     ({ name }) => name === router.query.filter
   );
 
-  if (router.query.filter !== filteredCategory?.name)
-  {
+  if (router.query.filter !== filteredCategory?.name) {
     return <h2>Not Available Yet</h2>;
   }
-
 
   return (
     <div>
@@ -26,9 +21,9 @@ export default function Categories() {
       </Head>
       <main className="px-20 font-Raleway pt-8 transition-colors">
         <h2 className="capitalize text-text text-3xl my-14">
-          { router.query.filter }
+          {router.query.filter}
         </h2>
-        <Category store={ filteredCategory } />
+        <Category store={filteredCategory} />
       </main>
     </div>
   );

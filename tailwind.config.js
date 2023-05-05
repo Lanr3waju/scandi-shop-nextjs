@@ -25,7 +25,7 @@ module.exports = {
       dark: "#2f613c",
       hoverBackground: "#EEEEEE",
       transparent: "transparent",
-      overlay: "rgba(57, 55, 72, 0.60)"
+      overlay: "rgba(57, 55, 72, 0.60)",
     },
   },
   plugins: [],
