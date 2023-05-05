@@ -15,6 +15,7 @@ module.exports = {
     },
     fontFamily: {
       Raleway: "Raleway, sans-serif",
+      Inter: "Inter, sans-serif",
     },
     colors: {
       white: "#fff",
@@ -22,7 +23,10 @@ module.exports = {
       text: "#1D1F22",
       light: "#a7fabd",
       dark: "#2f613c",
+      red: "red",
+      hoverBackground: "#EEEEEE",
       transparent: "transparent",
+      overlay: "rgba(57, 55, 72, 0.60)",
     },
   },
   plugins: [],
