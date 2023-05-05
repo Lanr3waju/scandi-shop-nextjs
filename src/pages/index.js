@@ -9,18 +9,21 @@ import store from "../../data/store.json";
 export default function Homepage() {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState();
+
   const { products } = store.data.categories.find(({ name }) => name === "all");
 
-  function handleChange(index) {
-    setCurrentIndex(index);
-  }
-
-  const renderSlides = products.map(({ gallery, name, id }) => (
+const renderSlides = products.map(({ gallery, name, id }) => (
     <div key={id}>
       <img src={gallery[0]} alt={name} />
       <p>{name}</p>
     </div>
   ));
+
+  function handleChange(index) {
+    setCurrentIndex(index);
+  }
+
+
 
   return (
     <>
