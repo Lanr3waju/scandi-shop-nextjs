@@ -9,11 +9,8 @@ import store from "../../data/store.json";
 export default function Homepage() {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState();
-  const { products } = store.data.categories.find(({ name }) => name === "all");
 
-  function handleChange(index) {
-    setCurrentIndex(index);
-  }
+  const { products } = store.data.categories.find(({ name }) => name === "all");
 
   const renderSlides = products.map(({ gallery, name, id }) => (
     <div key={id}>
@@ -21,6 +18,10 @@ export default function Homepage() {
       <p>{name}</p>
     </div>
   ));
+
+  function handleChange(index) {
+    setCurrentIndex(index);
+  }
 
   return (
     <>

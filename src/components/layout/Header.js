@@ -3,12 +3,13 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import store from "../../../data/store.json";
+import ToggleCurrencySwitcher from "../ToggleCurrencySwitcher";
 
 export const categories = store.data.categories.map(
   (category) => category.name
 );
 
-function Header() {
+function Header({ setOverlay }) {
   const router = useRouter();
   const [filterState, setFilterState] = useState(categories[0]);
 
@@ -17,7 +18,7 @@ function Header() {
   }, [router.query.filter]);
 
   return (
-    <header className="sticky top-0 border-t-4 border-primary bg-white w-full flex justify-between items-center px-20">
+    <header className="sticky top-0 border-t-4 border-primary bg-white w-full flex justify-between items-center px-20 z-50">
       <nav className="w-1/4">
         <ul className="flex font-Raleway text-text">
           {categories.map((category) => (
@@ -45,7 +46,7 @@ function Header() {
       </Link>
       <ul className="flex w-1/3 justify-end items-center">
         <li>
-          <Image src="/currency.png" width={38} height={29} alt="currency" />
+          <ToggleCurrencySwitcher setOverlay={setOverlay} />
         </li>
         <li>
           <Image

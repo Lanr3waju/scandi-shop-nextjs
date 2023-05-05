@@ -5,6 +5,7 @@ import Category from "@/components/Category";
 
 export default function Categories() {
   const router = useRouter();
+
   const filteredCategory = store.data.categories.find(
     ({ name }) => name === router.query.filter
   );
@@ -14,16 +15,16 @@ export default function Categories() {
   }
 
   return (
-    <>
+    <div>
       <Head>
         <title>Product Listing Page</title>
       </Head>
-      <main className="px-20 font-Raleway mt-8">
+      <main className="px-20 font-Raleway pt-8 transition-colors">
         <h2 className="capitalize text-text text-3xl my-14">
           {router.query.filter}
         </h2>
         <Category store={filteredCategory} />
       </main>
-    </>
+    </div>
   );
 }
