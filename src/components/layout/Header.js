@@ -18,7 +18,7 @@ function Header({ setOverlay }) {
   }, [router.query.filter]);
 
   return (
-    <header className="sticky top-0 border-t-4 border-primary bg-white w-full flex justify-between items-center px-20 z-50">
+    <header className="sticky top-0 border-t-4 border-primary bg-white w-full flex justify-between items-center px-14 z-50">
       <nav className="w-1/4">
         <ul className="flex font-Raleway text-text">
           {categories.map((category) => (
