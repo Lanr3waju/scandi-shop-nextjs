@@ -16,11 +16,15 @@ module.exports = {
     fontFamily: {
       Raleway: "Raleway, sans-serif",
       Inter: "Inter, sans-serif",
+      Roboto: "Roboto, sans-serif",
+      RobotoCondensed: "Roboto Condensed, sans-serif",
     },
     colors: {
       white: "#fff",
       primary: "#5ECE7B",
       text: "#1D1F22",
+      btnHover: "#3abb5c",
+      btnActive: "#2e9449",
       light: "#a7fabd",
       dark: "#2f613c",
       red: "red",

@@ -28,7 +28,7 @@ export default function ImageMagnifier({
         placeholder="blur"
         blurDataURL="/large-placeholder.png"
         alt="Product Image"
-        className="w-fit h-4/5 object-contain"
+              className="w-full h-4/5 object-contain"
         style={{ height: height, width: width }}
         onMouseEnter={(e) => {
           // update image size and turn-on magnifier
