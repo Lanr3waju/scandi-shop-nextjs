@@ -16,7 +16,7 @@ export default function DescriptionPage() {
   const product = store.data.categories[0].products.find(
     (product) => product.id === router.query.description
   );
-  const [activeImage, setActiveImage] = useState("/placeholder.png");
+  const [activeImage, setActiveImage] = useState("/large-placeholder.png");
   const [btnState, setBtnState] = useState(false);
   const productNameArr = product?.name.split(" ");
   const productFirstName = productNameArr && productNameArr[0];
