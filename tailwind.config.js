@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx}",
@@ -18,9 +20,11 @@ module.exports = {
       Inter: "Inter, sans-serif",
       Roboto: "Roboto, sans-serif",
       RobotoCondensed: "Roboto Condensed, sans-serif",
+      SourceSans: "Source Sans Pro, sans-serif"
     },
     colors: {
-      white: "#fff",
+      white: "white",
+      black: "black",
       primary: "#5ECE7B",
       text: "#1D1F22",
       btnHover: "#3abb5c",
@@ -33,5 +37,25 @@ module.exports = {
       overlay: "rgba(57, 55, 72, 0.60)",
     },
   },
-  plugins: [],
+  plugins: [plugin(({ addBase, theme }) => {
+    addBase({
+      '.scrollbar': {
+        overflowY: 'auto',
+        scrollbarColor: "red",
+        scrollbarWidth: 'large',
+      },
+      '.scrollbar::-webkit-scrollbar': {
+        height: '8px',
+        width: '8px',
+      },
+      '.scrollbar::-webkit-scrollbar-thumb': {
+        backgroundColor: "#5ECE7B",
+        borderRadius: 30
+      },
+      '.scrollbar::-webkit-scrollbar-track-piece': {
+        backgroundColor: "#EEEEEE",
+        borderRadius: 30
+      },
+    });
+  }),],
 };
