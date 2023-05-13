@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Currency } from "../../context/context";
+import { ScandiStore } from "../../context/context";
 import { useContext } from "react";
 
 export default function Category({ store }) {
-  const { currency } = useContext(Currency);
+  const { currency } = useContext(ScandiStore);
 
   return (
     <ul className="flex flex-wrap justify-start gap-20 pb-5 min-h-screen">

@@ -4,14 +4,14 @@ import store from "../../../data/store.json";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import ImageMagnifier from "@/components/Magnifier";
-import { Currency } from "../../../context/context";
+import { ScandiStore } from "../../../context/context";
 import { useContext } from "react";
 import parse from 'html-react-parser';
 
 
 
 export default function DescriptionPage() {
-  const { currency } = useContext(Currency);
+  const { currency, cart, setCart } = useContext(ScandiStore);
   const router = useRouter();
 
 
@@ -27,16 +27,27 @@ export default function DescriptionPage() {
   const productAttributesLength = product?.attributes.length;
   const attrStateLength = Object.keys(attrState).length;
 
-  console.log(productAttributesLength, 'prod length');
-  console.log(attrStateLength, 'attr Length')
-
-
   useEffect(() => {
     product && setActiveImage(product?.gallery[0]);
   }, [router.query.description]);
 
   const handleProductAttr = (key, value) => {
     setAttrState((prevState) => { return { ...prevState, [key]: value }; });
+  };
+
+  const handleCart = () => {
+    setCart((prevCart) => {
+      if (prevCart.length < 1) {
+        alert('Added item to cart');
+        return [...prevCart, attrState];
+      } else {
+        const prod = prevCart.find((item) => JSON.stringify(item) === JSON.stringify(attrState));
+        if (prod) {
+          alert('Item already exists in cart');
+          return prevCart;
+        } else { alert('Added item to cart'); return [...prevCart, attrState]; }
+      }
+    });
   };
 
   return (
@@ -116,7 +127,7 @@ export default function DescriptionPage() {
             <span className="text-lg">PRICE:</span>
             <span className="block text-2xl">{currency}  {price?.amount}</span>
           </h3>
-          <button className={`bg-primary text-white py-4 px-8 w-4/5 font-semibold my-5 ${product?.inStock && 'hover:bg-btnHover active:bg-btnActive transition-colors'} disabled:opacity-50`} disabled={!product?.inStock || attrStateLength < productAttributesLength + 1} type="button">ADD TO CART</button>
+          <button onClick={handleCart} className={`bg-primary text-white py-4 px-8 w-4/5 font-semibold my-5 ${product?.inStock && 'hover:bg-btnHover active:bg-btnActive transition-colors'} disabled:opacity-50`} disabled={!product?.inStock || attrStateLength < productAttributesLength + 1} type="button">ADD TO CART</button>
           <div className="font-medium tracking-wider p-2 font-Roboto mt-10 leading-6 max-h-56 mb-3 scrollbar">{product && parse(product.description)}</div>
         </section>
       </main>

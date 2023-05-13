@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { Currency } from "../../context/context";
+import { ScandiStore } from "../../context/context";
 import { useContext } from "react";
 import CurrencySwitcher from "./CurrencySwitcher";
 
 export default function ToggleCurrencySwitcher({ setOverlay }) {
   const [currencyState, setCurrencyState] = useState(false);
-  const { currency } = useContext(Currency);
+  const { currency } = useContext(ScandiStore);
 
   useEffect(() => {
     setOverlay(currencyState);
