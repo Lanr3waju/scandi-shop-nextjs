@@ -68,6 +68,7 @@ export default function ImageMagnifier({
           left: `${x - magnifierWidth / 2}px`,
           opacity: "1", // reduce opacity so you can verify position
           border: "1px solid lightgray",
+          borderRadius: 100,
           backgroundColor: "white",
           backgroundImage: `url('${src}')`,
           backgroundRepeat: "no-repeat",

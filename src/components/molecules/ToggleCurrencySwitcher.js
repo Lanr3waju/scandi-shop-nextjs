@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { ScandiStore } from "../../context/context";
+import { ScandiStore } from "../../../context/context";
 import { useContext } from "react";
-import CurrencySwitcher from "./CurrencySwitcher";
+import CurrencySwitcher from "../atoms/CurrencySwitcher";
 
 export default function ToggleCurrencySwitcher({ setOverlay }) {
   const [currencyState, setCurrencyState] = useState(false);
@@ -19,9 +19,8 @@ export default function ToggleCurrencySwitcher({ setOverlay }) {
       >
         {currency}
         <img
-          className={`inline p-3 ${
-            currencyState ? "rotate-180 " : "hover:animate-bounce"
-          }`}
+          className={`inline p-3 ${currencyState ? "rotate-180 " : "hover:animate-bounce"
+            }`}
           alt="currency"
           src="/arr-down.png"
         />

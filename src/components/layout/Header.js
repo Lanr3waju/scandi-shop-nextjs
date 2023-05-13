@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import store from "../../../data/store.json";
-import ToggleCurrencySwitcher from "../ToggleCurrencySwitcher";
+import ToggleCurrencySwitcher from "../molecules/ToggleCurrencySwitcher";
 
 export const categories = store.data.categories.map(
   (category) => category.name

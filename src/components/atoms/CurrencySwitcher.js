@@ -1,5 +1,5 @@
-import store from "../../data/store.json";
-import { ScandiStore } from "../../context/context";
+import store from "../../../data/store.json";
+import { ScandiStore } from "../../../context/context";
 import { useContext } from "react";
 
 export default function CurrencySwitcher({ setCurrencyState }) {

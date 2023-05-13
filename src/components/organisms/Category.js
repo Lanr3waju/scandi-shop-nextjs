@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ScandiStore } from "../../context/context";
+import { ScandiStore } from "../../../context/context";
 import { useContext } from "react";
 
 export default function Category({ store }) {
@@ -14,9 +14,8 @@ export default function Category({ store }) {
           className="w-80 h-96 shadow-sm rounded-lg p-6 shadow-hoverBackground hover:shadow-overlay hover:shadow-lg transition-shadow relative"
         >
           <span
-            className={`text-3xl font-medium text-overlay absolute top-1/4 left-[18%] -rotate-45 opacity-100 z-20 ${
-              inStock && "hidden"
-            }`}
+            className={`text-3xl font-medium text-overlay absolute top-1/4 left-[18%] -rotate-45 opacity-100 z-20 ${inStock && "hidden"
+              }`}
           >
             Out of stock
           </span>
