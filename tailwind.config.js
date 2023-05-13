@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const plugin = require('tailwindcss/plugin');
+const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   content: [
@@ -20,7 +20,7 @@ module.exports = {
       Inter: "Inter, sans-serif",
       Roboto: "Roboto, sans-serif",
       RobotoCondensed: "Roboto Condensed, sans-serif",
-      SourceSans: "Source Sans Pro, sans-serif"
+      SourceSans: "Source Sans Pro, sans-serif",
     },
     colors: {
       white: "white",
@@ -37,25 +37,25 @@ module.exports = {
       overlay: "rgba(57, 55, 72, 0.60)",
     },
   },
-  plugins: [plugin(({ addBase, theme }) => {
-    addBase({
-      '.scrollbar': {
-        overflowY: 'auto',
-        scrollbarColor: "red",
-        scrollbarWidth: 'large',
-      },
-      '.scrollbar::-webkit-scrollbar': {
-        height: '8px',
-        width: '8px',
-      },
-      '.scrollbar::-webkit-scrollbar-thumb': {
-        backgroundColor: "#5ECE7B",
-        borderRadius: 30
-      },
-      '.scrollbar::-webkit-scrollbar-track-piece': {
-        backgroundColor: "#EEEEEE",
-        borderRadius: 30
-      },
-    });
-  }),],
+  plugins: [
+    plugin(({ addBase }) => {
+      addBase({
+        ".scrollbar": {
+          overflowY: "auto",
+          scrollbarColor: "#5ECE7B",
+          scrollbarWidth: "large",
+        },
+        ".scrollbar::-webkit-scrollbar": {
+          width: "5px",
+        },
+        ".scrollbar::-webkit-scrollbar-thumb": {
+          backgroundColor: "#5ECE7B",
+          borderRadius: 30,
+        },
+        ".scrollbar::-webkit-scrollbar-track-piece": {
+          backgroundColor: "transparent",
+        },
+      });
+    }),
+  ],
 };

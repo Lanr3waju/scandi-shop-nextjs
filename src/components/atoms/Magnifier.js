@@ -14,6 +14,27 @@ export default function ImageMagnifier({
   const [showMagnifier, setShowMagnifier] = useState(false);
   return (
     <div
+      onMouseEnter={(e) => {
+        // update image size and turn-on magnifier
+        const elem = e.currentTarget;
+        const { width, height } = elem.getBoundingClientRect();
+        setSize([width, height]);
+        setShowMagnifier(true);
+      }}
+      onMouseMove={(e) => {
+        // update cursor position
+        const elem = e.currentTarget;
+        const { top, left } = elem.getBoundingClientRect();
+
+        // calculate cursor position on the image
+        const x = e.pageX - left - window.scrollX;
+        const y = e.pageY - top - window.scrollY;
+        setXY([x, y]);
+      }}
+      onMouseLeave={() => {
+        // close magnifier
+        setShowMagnifier(false);
+      }}
       style={{
         position: "relative",
         height: height,
@@ -28,29 +49,8 @@ export default function ImageMagnifier({
         placeholder="blur"
         blurDataURL="/large-placeholder.png"
         alt="Product Image"
-              className="w-full h-4/5 object-contain"
+        className="w-full h-4/5 object-contain relative -z-10"
         style={{ height: height, width: width }}
-        onMouseEnter={(e) => {
-          // update image size and turn-on magnifier
-          const elem = e.currentTarget;
-          const { width, height } = elem.getBoundingClientRect();
-          setSize([width, height]);
-          setShowMagnifier(true);
-        }}
-        onMouseMove={(e) => {
-          // update cursor position
-          const elem = e.currentTarget;
-          const { top, left } = elem.getBoundingClientRect();
-
-          // calculate cursor position on the image
-          const x = e.pageX - left - window.scrollX;
-          const y = e.pageY - top - window.scrollY;
-          setXY([x, y]);
-        }}
-        onMouseLeave={() => {
-          // close magnifier
-          setShowMagnifier(false);
-        }}
       />
 
       <div
