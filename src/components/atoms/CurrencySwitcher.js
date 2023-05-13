@@ -1,9 +1,9 @@
-import store from "../../data/store.json";
-import { Currency } from "../../context/context";
+import store from "../../../data/store.json";
+import { ScandiStore } from "../../../context/context";
 import { useContext } from "react";
 
 export default function CurrencySwitcher({ setCurrencyState }) {
-  const { setCurrency } = useContext(Currency);
+  const { setCurrency } = useContext(ScandiStore);
   const availableCurrencies = store.data.categories[0].products[0].prices;
 
   const handleSetCurrency = (currency) => {

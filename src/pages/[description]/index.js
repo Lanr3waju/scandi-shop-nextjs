@@ -1,12 +1,15 @@
 import Head from "next/head";
+import Description from "@/components/organisms/Description";
 
 export default function DescriptionPage() {
   return (
-    <div>
+    <>
       <Head>
         <title>Description Page</title>
       </Head>
-      <h1>Description</h1>
-    </div>
+      <main className="flex p-14 font-Raleway text-text">
+        <Description />
+      </main>
+    </>
   );
 }

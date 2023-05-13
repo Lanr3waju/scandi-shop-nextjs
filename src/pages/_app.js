@@ -10,11 +10,11 @@ export default function App({ Component, pageProps }) {
     return Component.getLayout(<Component {...pageProps} />);
   }
   return (
-    <Context>
-      <div className={`${overlay && "bg-overlay z-50"}`}>
+    <div className={`${overlay && "bg-overlay z-50"}`}>
+      <Context>
         <Header setOverlay={setOverlay} />
         <Component {...pageProps} />
-      </div>
-    </Context>
+      </Context>
+    </div>
   );
 }

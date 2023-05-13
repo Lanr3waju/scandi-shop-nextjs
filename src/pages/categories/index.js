@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import store from "../../../data/store.json";
-import Category from "@/components/Category";
+import Category from "@/components/organisms/Category";
 
 export default function Categories() {
   const router = useRouter();
