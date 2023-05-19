@@ -5,16 +5,17 @@ import { useState, useEffect } from "react";
 import ImageMagnifier from "@/components/atoms/Magnifier";
 import { ScandiStore } from "../../../context/context";
 import { useContext } from "react";
+import createTotalPriceAndQty from "../atoms/getTotalPriceQty";
 import parse from "html-react-parser";
 
 export default function Description() {
-  const { currency, setCart } = useContext(ScandiStore);
+  const { currency, cart, setCart, totalPrice, setTotalPrice, totalQuantity, setTotalQuantity } = useContext(ScandiStore);
   const router = useRouter();
 
   const product = store.data.categories[0].products.find(
     (product) => product.id === router.query.description
   );
-  const [attrState, setAttrState] = useState({ productId: product?.id });
+  const [attrState, setAttrState] = useState({ productId: product?.id, quantity: 1 });
   const [activeImage, setActiveImage] = useState("/large-placeholder.png");
   const productNameArr = product?.name.split(" ");
   const productFirstName = productNameArr && productNameArr[0];
@@ -24,14 +25,23 @@ export default function Description() {
   );
   const productAttributesLength = product?.attributes.length;
   const attrStateLength = Object.keys(attrState).length;
+  const totalPriceAndQty = createTotalPriceAndQty(cart, currency)
 
   useEffect(() => {
     product && setActiveImage(product?.gallery[0]);
   }, [router.query.description]);
 
-  const handleProductAttr = (key, value) => {
+  useEffect(() => {
+    setTotalPrice(totalPriceAndQty.totalPrice);
+  }, [cart, currency]);
+
+  useEffect(() => {
+    setTotalQuantity(totalPriceAndQty.totalQuantity);
+  }, [cart]);
+
+  const handleProductAttr = (key, value, attributes, images) => {
     setAttrState((prevState) => {
-      return { ...prevState, [key]: value };
+      return { ...prevState, [key]: value, attributes: attributes, images: images, prices: product?.prices, name: productNameArr };
     });
   };
 
@@ -98,14 +108,13 @@ export default function Description() {
                       <div>
                         <button
                           onClick={() =>
-                            handleProductAttr(attr.name, item.value)
+                            handleProductAttr(attr.name, item.value, product?.attributes, product?.gallery)
                           }
                           aria-label="Product Colors"
-                          className={`w-10 h-10 border-2 flex justify-center items-center my-2 mx-2 ${
-                            attrState[attr.name] === item.value
+                          className={`w-10 h-10 border-2 flex justify-center items-center my-2 mx-2 ${attrState[attr.name] === item.value
                               ? "border-primary"
                               : "border-transparent"
-                          }`}
+                            }`}
                           name={attr.name}
                           type="button"
                         >
@@ -119,17 +128,15 @@ export default function Description() {
                       </div>
                     ) : (
                       <button
-                        onClick={() => handleProductAttr(attr.name, item.value)}
-                        // className="relative"
+                          onClick={() => handleProductAttr(attr.name, item.value, product?.attributes, product?.gallery)}
                         type="button"
                         name={attr.name}
                       >
                         <div
-                          className={`font-SourceSans flex justify-center items-center border-2 border-black w-16 h-12 my-2 mx-2 -z-20 relative ${
-                            attrState[attr.name] === item.value
+                            className={`font-SourceSans flex justify-center items-center border-2 border-black w-16 h-12 my-2 mx-2 -z-20 relative ${attrState[attr.name] === item.value
                               ? "bg-black text-white"
                               : "bg-white text-black"
-                          }`}
+                              }`}
                         >
                           {item.value}
                         </div>
@@ -147,20 +154,19 @@ export default function Description() {
         </p>
         <button
           onClick={handleCart}
-          className={`bg-primary text-white py-4 px-8 w-4/5 font-semibold my-5 ${
-            product?.inStock &&
+          className={`bg-primary text-white py-4 px-8 w-4/5 font-semibold my-5 ${product?.inStock &&
             "hover:bg-btnHover active:bg-btnActive transition-colors"
-          } disabled:opacity-60`}
+            } disabled:opacity-60`}
           disabled={
-            !product?.inStock || attrStateLength < productAttributesLength + 1
+            !product?.inStock || attrStateLength < productAttributesLength + 6
           }
           type="button"
         >
           {product?.inStock ? "ADD TO CART" : "OUT OF STOCK"}
         </button>
-        <p className="font-medium tracking-wider p-2 font-Roboto mt-10 leading-6 max-h-56 mb-3 scrollbar">
+        <div className="font-medium tracking-wider p-2 font-Roboto mt-10 leading-6 max-h-56 mb-3 scrollbar">
           {product && parse(product.description)}
-        </p>
+        </div>
       </section>
     </>
   );
