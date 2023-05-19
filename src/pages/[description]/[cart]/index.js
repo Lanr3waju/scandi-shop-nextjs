@@ -1,6 +1,6 @@
 import Cart from "@/components/organisms/Cart";
 import Head from "next/head";
-import store from "../../../../data/store.json"
+import store from "../../../../data/store.json";
 
 export default function CartPage() {
   return (

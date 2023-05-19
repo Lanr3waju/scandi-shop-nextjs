@@ -32,9 +32,10 @@ function Header({ setOverlay }) {
                     shallow: true,
                   })
                 }
-                className={`p-4 uppercase mr-4 ${category === filterState &&
+                className={`p-4 uppercase mr-4 ${
+                  category === filterState &&
                   "border-b-2 border-primary text-primary"
-                  }`}
+                }`}
               >
                 {category}
               </button>
@@ -43,7 +44,13 @@ function Header({ setOverlay }) {
         </ul>
       </nav>
       <Link href="/">
-        <Image className="w-9 h-9 object-contain" src="/logo.png" width={40} height={40} alt="logo" />
+        <Image
+          className="w-9 h-9 object-contain"
+          src="/logo.png"
+          width={40}
+          height={40}
+          alt="logo"
+        />
       </Link>
       <ul className="flex w-1/3 justify-end items-center">
         <li>

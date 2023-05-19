@@ -18,7 +18,18 @@ function Context({ children }) {
   }, [cart]);
 
   return (
-    <ScandiStore.Provider value={{ currency, setCurrency, cart, setCart, totalPrice, setTotalPrice, totalQuantity, setTotalQuantity }}>
+    <ScandiStore.Provider
+      value={{
+        currency,
+        setCurrency,
+        cart,
+        setCart,
+        totalPrice,
+        setTotalPrice,
+        totalQuantity,
+        setTotalQuantity,
+      }}
+    >
       {children}
     </ScandiStore.Provider>
   );
