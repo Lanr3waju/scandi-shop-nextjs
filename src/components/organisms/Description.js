@@ -71,17 +71,17 @@ export default function Description() {
   return (
     <>
       <section className="w-1/4">
-        <ul className="w-full">
+        <ul className="w-full h-[70vh] scrollbar">
           {product?.gallery.map((image) => (
             <li key={image}>
               <button
-                className="mb-4 relative"
+                className="mb-2 relative"
                 onClick={() => setActiveImage(image)}
               >
                 <Image
                   placeholder="blur"
                   blurDataURL="/small-placeholder.png"
-                  className="w-full h-full object-contain -z-30 relative"
+                  className="w-3/4 h-3/4 object-contain -z-30 relative"
                   src={image}
                   alt="product"
                   width={100}
