@@ -4,7 +4,7 @@ import { ScandiStore } from "../../../context/context";
 import { useContext } from "react";
 
 export default function Category({ store }) {
-  const { currency } = useContext(ScandiStore);
+  const { currency, totalQuantity } = useContext(ScandiStore);
 
   return (
     <ul className="flex flex-wrap justify-start gap-20 pb-5 min-h-screen">

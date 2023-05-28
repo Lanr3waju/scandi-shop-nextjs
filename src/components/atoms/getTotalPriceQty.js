@@ -5,10 +5,10 @@ function createTotalPriceAndQty(cart, currency) {
   let totalQuantity = [];
 
   cart.forEach((item) => {
-    const cartPrice = item.prices.find(
+    const cartPrice = item?.prices?.find(
       (price) => price.currency.symbol === currency
     );
-    totalPrice = [...totalPrice, cartPrice.amount * item.quantity];
+    totalPrice = [...totalPrice, cartPrice?.amount * item.quantity];
     totalQuantity = [...totalQuantity, item.quantity];
   });
 

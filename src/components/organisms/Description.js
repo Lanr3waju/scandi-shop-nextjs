@@ -5,28 +5,18 @@ import { useState, useEffect } from "react";
 import ImageMagnifier from "@/components/atoms/Magnifier";
 import { ScandiStore } from "../../../context/context";
 import { useContext } from "react";
-import createTotalPriceAndQty from "../atoms/getTotalPriceQty";
 import parse from "html-react-parser";
 
 export default function Description() {
   const {
     currency,
-    cart,
     setCart,
-    totalPrice,
-    setTotalPrice,
-    totalQuantity,
-    setTotalQuantity,
   } = useContext(ScandiStore);
   const router = useRouter();
 
   const product = store.data.categories[0].products.find(
     (product) => product.id === router.query.description
   );
-  const [attrState, setAttrState] = useState({
-    productId: product?.id,
-    quantity: 1,
-  });
   const [activeImage, setActiveImage] = useState("/large-placeholder.png");
   const productNameArr = product?.name.split(" ");
   const productFirstName = productNameArr && productNameArr[0];
@@ -34,21 +24,19 @@ export default function Description() {
   const price = product?.prices.find(
     (price) => price.currency.symbol === currency
   );
+  const [attrState, setAttrState] = useState({
+    productId: product?.id,
+    image: product?.gallery[0],
+    prices: product?.prices,
+    name: productNameArr,
+    quantity: 1,
+  });
   const productAttributesLength = product?.attributes.length;
   const attrStateLength = Object.keys(attrState).length;
-  const totalPriceAndQty = createTotalPriceAndQty(cart, currency);
 
   useEffect(() => {
     product && setActiveImage(product?.gallery[0]);
   }, [router.query.description]);
-
-  useEffect(() => {
-    setTotalPrice(totalPriceAndQty.totalPrice);
-  }, [cart, currency]);
-
-  useEffect(() => {
-    setTotalQuantity(totalPriceAndQty.totalQuantity);
-  }, [cart]);
 
   const handleProductAttr = (key, value, attributes, images) => {
     setAttrState((prevState) => {
@@ -56,9 +44,6 @@ export default function Description() {
         ...prevState,
         [key]: value,
         attributes: attributes,
-        images: images,
-        prices: product?.prices,
-        name: productNameArr,
       };
     });
   };
@@ -157,7 +142,6 @@ export default function Description() {
                             attr.name,
                             item.value,
                             product?.attributes,
-                            product?.gallery
                           )
                         }
                         type="button"
@@ -190,9 +174,8 @@ export default function Description() {
             product?.inStock &&
             "hover:bg-btnHover active:bg-btnActive transition-colors"
           } disabled:opacity-60`}
-          disabled={
-            !product?.inStock || attrStateLength < productAttributesLength + 6
-          }
+          disabled={!product?.inStock || (productAttributesLength > 0 && attrStateLength < productAttributesLength + 6)}
+
           type="button"
         >
           {product?.inStock ? "ADD TO CART" : "OUT OF STOCK"}

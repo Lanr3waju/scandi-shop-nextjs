@@ -12,11 +12,8 @@ export default function Cart() {
     setCart,
     totalPrice,
     totalQuantity,
-    setTotalPrice,
-    setTotalQuantity,
   } = useContext(ScandiStore);
   const [scandiCart, setScandiCart] = useState([]);
-  const totalPriceAndQty = createTotalPriceAndQty(cart, currency);
 
   function hasDuplicateObjects(array) {
     return array.some((item, index) =>
@@ -26,14 +23,6 @@ export default function Cart() {
       )
     );
   }
-
-  useEffect(() => {
-    setTotalPrice(totalPriceAndQty.totalPrice);
-  }, [cart, currency]);
-
-  useEffect(() => {
-    setTotalQuantity(totalPriceAndQty.totalQuantity);
-  }, [cart]);
 
   function isEqual(obj1, obj2) {
     return JSON.stringify(obj1) === JSON.stringify(obj2);
@@ -94,7 +83,7 @@ export default function Cart() {
 
   const cartEl = scandiCart.map((item) => {
     key += 1;
-    const price = item.prices.find(
+    const price = item.prices?.find(
       (price) => price.currency.symbol === currency
     );
     const productFirstName = item.name[0];
@@ -120,7 +109,7 @@ export default function Cart() {
               </h3>
             </article>
           </section>
-          {item.attributes.map((attr) => (
+          {item.attributes?.map((attr) => (
             <ul className="relative bock" key={attr.id}>
               <li className="uppercase font-bold mt-7">{attr.name}:</li>
               <li>
@@ -187,7 +176,7 @@ export default function Cart() {
               blurDataURL="/small-placeholder.png"
               className="w-60 h-60 object-contain -z-30 relative cursor-pointer"
               priority
-              src={item.images[0]}
+              src={item.image}
               onClick={() => {
                 useRouter;
               }}
@@ -232,6 +221,7 @@ export default function Cart() {
       </section>
     );
   });
+
   return (
     <>
       {hasDuplicateObjects(scandiCart) && (
@@ -240,12 +230,15 @@ export default function Cart() {
         </p>
       )}
       {cartEl}
+      {
+        scandiCart.length < 1 ? <h1>Oops! your cart is empty</h1> :
       <section>
         <h3>Quantity: {totalQuantity}</h3>
         <h3 className="font-Roboto font-bold text-2xl">
           Total: {currency} {totalPrice}
         </h3>
       </section>
+      }
     </>
   );
 }
