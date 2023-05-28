@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ScandiStore } from "../../../context/context";
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import createTotalPriceAndQty from "../atoms/getTotalPriceQty";
+import roundToTwoDecimalPlaces from "../atoms/roundToTwoFloat";
 
 export default function Cart() {
   const router = useRouter();
@@ -91,21 +91,17 @@ export default function Cart() {
     return (
       <section
         key={key}
-        className="w-full mb-10 border-b-4 border-primary flex justify-between items-center"
+        className="w-full mb-4 border-b-4 border-primary flex justify-between items-center"
       >
         <div>
           <section className="flex">
-            <p className="mr-4 text-2xl font-extrabold">{key}</p>
             <article>
               <h2 className="text-2xl">
-                <span className="font-semibold block mb-2">
-                  {productFirstName}
-                </span>
+                <span className="font-semibold block mb-2">{productFirstName}</span>
                 <span>{productOtherNames}</span>
               </h2>
-              <h3 className="font-RobotoCondensed font-bold my-2 text-2xl">
-                {currency}
-                {price.amount * item.quantity}
+              <h3 className="font-RobotoCondensed font-bold my-2 text-lg">
+                {currency}  {roundToTwoDecimalPlaces(price.amount * item.quantity)}
               </h3>
             </article>
           </section>
@@ -123,7 +119,7 @@ export default function Cart() {
                               handleProductAttr(attr.name, attrItem.value, item)
                             }
                             aria-label="Product Colors"
-                            className={`w-10 h-10 border-2 flex justify-center items-center my-2 mx-2 ${
+                            className={`w-10 h-10 border-2 flex justify-center items-center m-1 text-lg ${
                               item[attr.name] === attrItem.value
                                 ? "border-primary"
                                 : "border-transparent"
@@ -135,7 +131,7 @@ export default function Cart() {
                               style={{
                                 backgroundColor: attrItem.value,
                               }}
-                              className="flex justify-center items-center my-2 mx-2 absolute w-8 h-8 -z-10"
+                              className="flex justify-center items-center m-1 absolute w-8 h-8 -z-10"
                             />
                           </button>
                         </div>
@@ -148,7 +144,7 @@ export default function Cart() {
                           name={attr.name}
                         >
                           <div
-                            className={`font-SourceSans flex justify-center items-center border-2 border-black w-16 h-12 my-2 mx-2 -z-20 relative ${
+                              className={`font-SourceSans flex justify-center items-center border-2 border-black w-12 h-10 my-2 mx-2 -z-20 relative ${
                               item[attr.name] === attrItem.value
                                 ? "bg-black text-white"
                                 : "bg-white text-black"
@@ -174,21 +170,21 @@ export default function Cart() {
             <Image
               placeholder="blur"
               blurDataURL="/small-placeholder.png"
-              className="w-60 h-60 object-contain -z-30 relative cursor-pointer"
+              className="w-40 h-40 object-contain -z-30 relative cursor-pointer"
               priority
               src={item.image}
               onClick={() => {
                 useRouter;
               }}
               alt="product"
-              width={300}
-              height={300}
+              width={170}
+              height={170}
             />
           </button>
           <div className="flex justify-between items-center">
             <button
               onClick={() => decreaseProductQty(item)}
-              className="text-2xl font-semibold text-white rounded-sm bg-primary hover:bg-dark transition-all active:translate-y-1 px-5"
+              className="text-xl font-semibold text-white rounded-sm bg-primary hover:bg-dark transition-all active:translate-y-1 px-3"
             >
               -
             </button>
@@ -197,25 +193,26 @@ export default function Cart() {
             </p>
             <button
               onClick={() => increaseProductQty(item)}
-              className="text-2xl font-semibold text-white rounded-sm bg-primary hover:bg-dark transition-all active:translate-y-1 px-5"
+              className="text-xl font-semibold text-white rounded-sm bg-primary hover:bg-dark transition-all active:translate-y-1 px-3"
             >
               +
             </button>
           </div>
           <button
-            className="p-2 my-5 shadow-md shadow-overlay rounded-full border-4 transition-all border-primary hover:border-red active:translate-y-1"
+            className="flex p-1 items-center my-5 shadow-md shadow-overlay rounded-sm border-4 transition-all border-primary hover:border-red active:translate-y-1"
             type="button"
             onClick={() => removeProduct(item)}
           >
             <Image
               placeholder="blur"
               blurDataURL="/small-placeholder.png"
-              className="w-12 h-12 object-contain -z-30 relative "
+              className="w-6 h-6 object-contain -z-30 relative "
               src="/delete.png"
               alt="product"
-              width={50}
-              height={50}
+              width={30}
+              height={30}
             />
+            <span className="font-semibold ml-2">remove item</span>
           </button>
         </section>
       </section>
@@ -232,11 +229,10 @@ export default function Cart() {
       {cartEl}
       {
         scandiCart.length < 1 ? <h1>Oops! your cart is empty</h1> :
-      <section>
-        <h3>Quantity: {totalQuantity}</h3>
-        <h3 className="font-Roboto font-bold text-2xl">
-          Total: {currency} {totalPrice}
-        </h3>
+          <section className="font-medium text-xl">
+            <h3 className="mb-2">Quantity: <span className="font-bold tracking-wider">{totalQuantity}</span></h3>
+            <h3> Total: <span className="font-bold tracking-wider font-Roboto">{currency} {totalPrice}</span> </h3>
+            <button className="bg-primary uppercase px-4 py-2 text-white my-5">Order</button>
       </section>
       }
     </>

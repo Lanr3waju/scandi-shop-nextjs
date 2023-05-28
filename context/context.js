@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import getCartFromLocalStorage from "@/components/atoms/getCartFromLocalStorage";
 import store from "../data/store.json";
-import createTotalPriceAndQty from "@/components/atoms/getTotalPriceQty";
+import createTotalPriceAndQty from "@/components/molecules/getTotalPriceQty";
 
 const initialCurrency =
   store.data.categories[0].products[0].prices[0].currency.symbol;
