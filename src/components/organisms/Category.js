@@ -4,14 +4,14 @@ import { ScandiStore } from "../../../context/context";
 import { useContext } from "react";
 
 export default function Category({ store }) {
-  const { currency, totalQuantity } = useContext(ScandiStore);
+  const { currency } = useContext(ScandiStore);
 
   return (
-    <ul className="flex flex-wrap justify-start gap-20 pb-5 min-h-screen">
+    <ul className="flex w-full flex-wrap gap-4 pb-5 min-h-screen">
       {store?.products.map(({ id, gallery, name, prices, inStock }) => (
         <li
           key={id}
-          className="w-80 h-96 shadow-lg rounded-lg p-6 shadow-overlay hover:shadow-overlay hover:shadow-md transition-shadow relative"
+          className="w-fit h-96 py-5 px-1 hover:shadow-light hover:shadow-md rounded-sm transition-shadow relative"
         >
           <span
             className={`text-3xl font-medium text-overlay absolute top-1/3 left-[18%] -rotate-45 opacity-100 ${
@@ -23,10 +23,10 @@ export default function Category({ store }) {
           <Link href={`/${id}`}>
             <section className={`relative -z-30 ${!inStock && "opacity-40"}`}>
               <Image
-                className="w-64 h-72 object-contain border-b-2 border-primary pb-2"
+                className="w-72 h-72 object-contain pb-2"
                 src={gallery[0]}
-                width={330}
-                height={340}
+                width={300}
+                height={300}
                 placeholder={true}
                 alt={name}
               />

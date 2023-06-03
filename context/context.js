@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import getCartFromLocalStorage from "@/components/atoms/getCartFromLocalStorage";
 import store from "../data/store.json";
 import createTotalPriceAndQty from "@/components/molecules/getTotalPriceQty";
+import roundToTwoDecimalPlaces from "@/components/atoms/roundToTwoFloat";
 
 const initialCurrency =
   store.data.categories[0].products[0].prices[0].currency.symbol;
@@ -24,7 +25,7 @@ function Context({ children }) {
   }, [cart]);
 
   useEffect(() => {
-    setTotalPrice(totalPriceAndQty.totalPrice);
+    setTotalPrice(roundToTwoDecimalPlaces(totalPriceAndQty.totalPrice));
   }, [cart, currency]);
 
   return (

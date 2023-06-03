@@ -1,5 +1,3 @@
-import roundToTwoDecimalPlaces from "../atoms/roundToTwoFloat";
-
 function createTotalPriceAndQty(cart, currency) {
   const arraySum = (arr) => arr.reduce((acc, curr) => acc + curr, 0);
 
@@ -10,7 +8,7 @@ function createTotalPriceAndQty(cart, currency) {
     const cartPrice = item?.prices?.find(
       (price) => price.currency.symbol === currency
     );
-    totalPrice = [...totalPrice, roundToTwoDecimalPlaces(cartPrice?.amount * item.quantity)];
+    totalPrice = [...totalPrice, cartPrice?.amount * item.quantity];
     totalQuantity = [...totalQuantity, item.quantity];
   });
 
