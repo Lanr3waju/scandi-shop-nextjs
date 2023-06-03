@@ -1,42 +1,54 @@
-import { useRouter } from "next/router";
-import store from "../../../data/store.json";
-import Image from "next/image";
-import { useState, useEffect } from "react";
-import ImageMagnifier from "@/components/atoms/Magnifier";
-import { ScandiStore } from "../../../context/context";
-import { useContext } from "react";
-import parse from "html-react-parser";
+import { useRouter } from "next/router"
+import store from "../../../data/store.json"
+import Image from "next/image"
+import { useState, useEffect } from "react"
+import ImageMagnifier from "@/components/atoms/Magnifier"
+import { ScandiStore } from "../../../context/context"
+import { useContext } from "react"
+import parse from "html-react-parser"
 
 export default function Description() {
   const {
     currency,
     setCart,
-  } = useContext(ScandiStore);
-  const router = useRouter();
+  } = useContext(ScandiStore)
+  const router = useRouter()
 
   const product = store.data.categories[0].products.find(
     (product) => product.id === router.query.description
-  );
-  const [activeImage, setActiveImage] = useState("/large-placeholder.png");
-  const productNameArr = product?.name.split(" ");
-  const productFirstName = productNameArr && productNameArr[0];
-  const productOtherNames = productNameArr && productNameArr.slice(1).join(" ");
+  )
+  const [activeImage, setActiveImage] = useState("/large-placeholder.png")
+  const productNameArr = product?.name.split(" ")
+  const productFirstName = productNameArr && productNameArr[0]
+  const productOtherNames = productNameArr && productNameArr.slice(1).join(" ")
   const price = product?.prices.find(
     (price) => price.currency.symbol === currency
-  );
+  )
   const [attrState, setAttrState] = useState({
     productId: product?.id,
     image: product?.gallery[0],
     prices: product?.prices,
     name: productNameArr,
     quantity: 1,
-  });
-  const productAttributesLength = product?.attributes.length;
-  const attrStateLength = Object.keys(attrState).length;
+  })
+
+  const [itemExists, setItemExists] = useState(false)
+  const productAttributesLength = product?.attributes.length
+  const attrStateLength = Object.keys(attrState).length
 
   useEffect(() => {
-    product && setActiveImage(product?.gallery[0]);
-  }, [router.query.description]);
+    product && setActiveImage(product?.gallery[0])
+  }, [router.query.description])
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setItemExists(false)
+    }, 4000)
+
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [itemExists])
 
   const handleProductAttr = (key, value, attributes, images) => {
     setAttrState((prevState) => {
@@ -44,32 +56,35 @@ export default function Description() {
         ...prevState,
         [key]: value,
         attributes: attributes,
-      };
-    });
-  };
+      }
+    })
+  }
 
   const handleCart = () => {
     setCart((prevCart) => {
       if (prevCart.length < 1) {
-        alert("Added item to cart");
-        return [...prevCart, attrState];
+        alert("Added item to cart")
+        return [...prevCart, attrState]
       } else {
         const prod = prevCart.find(
           (item) => JSON.stringify(item) === JSON.stringify(attrState)
-        );
+        )
         if (prod) {
-          alert("Item already exists in cart");
-          return prevCart;
+          setItemExists(true)
+          return prevCart
         } else {
-          alert("Added item to cart");
-          return [...prevCart, attrState];
+          alert("Added item to cart")
+          return [...prevCart, attrState]
         }
       }
-    });
-  };
+    })
+  }
 
   return (
     <>
+      {itemExists && <div className="alert alert-error absolute top-5 p-5 px-60 text-2xl w-fit z-50">
+        <span className="text-white">Item already exists in cart!</span>
+      </div>}
       <section className="w-1/4">
         <ul className="w-full h-[70vh] scrollbar">
           {product?.gallery.map((image) => (
@@ -119,11 +134,10 @@ export default function Description() {
                             )
                           }
                           aria-label="Product Colors"
-                          className={`w-10 h-10 border-2 flex justify-center items-center my-2 mx-2 ${
-                            attrState[attr.name] === item.value
-                              ? "border-primary"
-                              : "border-transparent"
-                          }`}
+                          className={`w-10 h-10 border-2 flex justify-center items-center my-2 mx-2 ${attrState[attr.name] === item.value
+                            ? "border-primary"
+                            : "border-transparent"
+                            }`}
                           name={attr.name}
                           type="button"
                         >
@@ -148,11 +162,10 @@ export default function Description() {
                         name={attr.name}
                       >
                         <div
-                          className={`font-SourceSans flex justify-center items-center border-2 border-black w-16 h-12 my-2 mx-2 -z-20 relative ${
-                            attrState[attr.name] === item.value
+                            className={`font-SourceSans flex justify-center items-center border-2 border-black w-16 h-12 my-2 mx-2 -z-20 relative ${attrState[attr.name] === item.value
                               ? "bg-black text-white"
                               : "bg-white text-black"
-                          }`}
+                              }`}
                         >
                           {item.value}
                         </div>
@@ -170,10 +183,9 @@ export default function Description() {
         </p>
         <button
           onClick={handleCart}
-          className={`bg-primary text-white py-4 px-8 w-4/5 font-semibold my-5 ${
-            product?.inStock &&
+          className={`bg-primary text-white py-4 px-8 w-4/5 font-semibold my-5 ${product?.inStock &&
             "hover:bg-btnHover active:bg-btnActive transition-colors"
-          } disabled:opacity-60`}
+            } disabled:opacity-60`}
           disabled={!product?.inStock || (productAttributesLength > 0 && attrStateLength < productAttributesLength + 6)}
 
           type="button"
@@ -185,5 +197,5 @@ export default function Description() {
         </div>
       </section>
     </>
-  );
+  )
 }
