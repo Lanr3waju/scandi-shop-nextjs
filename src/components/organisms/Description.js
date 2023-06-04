@@ -6,6 +6,8 @@ import ImageMagnifier from "@/components/atoms/Magnifier"
 import { ScandiStore } from "../../../context/context"
 import { useContext } from "react"
 import parse from "html-react-parser"
+import AlertError from "../atoms/AlertError"
+import AlertSuccess from "../atoms/AlertSuccess"
 
 export default function Description() {
   const {
@@ -33,6 +35,7 @@ export default function Description() {
   })
 
   const [itemExists, setItemExists] = useState(false)
+  const [itemAdded, setItemAdded] = useState(false)
   const productAttributesLength = product?.attributes.length
   const attrStateLength = Object.keys(attrState).length
 
@@ -43,12 +46,13 @@ export default function Description() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setItemExists(false)
-    }, 4000)
+      setItemAdded(false)
+    }, 3000)
 
     return () => {
       clearTimeout(timeout)
     }
-  }, [itemExists])
+  }, [itemExists, itemAdded])
 
   const handleProductAttr = (key, value, attributes, images) => {
     setAttrState((prevState) => {
@@ -63,17 +67,20 @@ export default function Description() {
   const handleCart = () => {
     setCart((prevCart) => {
       if (prevCart.length < 1) {
-        alert("Added item to cart")
+        itemExists && setItemExists(false)
+        setItemAdded(true)
         return [...prevCart, attrState]
       } else {
         const prod = prevCart.find(
           (item) => JSON.stringify(item) === JSON.stringify(attrState)
         )
         if (prod) {
+          itemAdded && setItemAdded(false)
           setItemExists(true)
           return prevCart
         } else {
-          alert("Added item to cart")
+          itemExists && setItemExists(false)
+          setItemAdded(true)
           return [...prevCart, attrState]
         }
       }
@@ -82,9 +89,10 @@ export default function Description() {
 
   return (
     <>
-      {itemExists && <div className="alert alert-error absolute top-5 p-5 px-60 text-2xl w-fit z-50">
-        <span className="text-white">Item already exists in cart!</span>
-      </div>}
+      {itemExists && <AlertError>Item already exists in cart!</AlertError>}
+      {
+        itemAdded && <AlertSuccess>Added item to cart successfully</AlertSuccess>
+      }
       <section className="w-1/4">
         <ul className="w-full h-[70vh] scrollbar">
           {product?.gallery.map((image) => (
@@ -112,12 +120,12 @@ export default function Description() {
       </section>
       <section className="w-2/5">
         <h2 className="text-2xl">
-          <span className="font-semibold block mb-4">{productFirstName}</span>
-          <span>{productOtherNames}</span>
+          <span className="font-semibold block mb-4 text-secondary-focus">{productFirstName}</span>
+          <span className="text-base-content">{productOtherNames}</span>
         </h2>
         {product?.attributes.map((attr) => (
           <ul className="relative" key={attr.id}>
-            <li className="uppercase font-bold mt-7">{attr.name}:</li>
+            <li className="uppercase font-bold mt-7 text-base-content">{attr.name}:</li>
             <li>
               <ul className="flex flex-wrap w-full">
                 {attr.items.map((item) => (
@@ -135,7 +143,7 @@ export default function Description() {
                           }
                           aria-label="Product Colors"
                           className={`w-10 h-10 border-2 flex justify-center items-center my-2 mx-2 ${attrState[attr.name] === item.value
-                            ? "border-primary"
+                            ? "border-secondary"
                             : "border-transparent"
                             }`}
                           name={attr.name}
@@ -162,8 +170,8 @@ export default function Description() {
                         name={attr.name}
                       >
                         <div
-                            className={`font-SourceSans flex justify-center items-center border-2 border-black w-16 h-12 my-2 mx-2 -z-20 relative ${attrState[attr.name] === item.value
-                              ? "bg-black text-white"
+                            className={`font-SourceSans flex justify-center items-center border-2 border-secondary w-16 h-12 my-2 mx-2 -z-20 relative ${attrState[attr.name] === item.value
+                              ? "bg-secondary text-white"
                               : "bg-white text-black"
                               }`}
                         >
@@ -177,22 +185,20 @@ export default function Description() {
             </li>
           </ul>
         ))}
-        <h3 className="font-RobotoCondensed font-bold mt-7 text-lg">PRICE:</h3>
-        <p className="font-bold text-2xl font-RobotoCondensed">
+        <h3 className="font-RobotoCondensed font-bold mt-7 text-lg text-base-content">PRICE:</h3>
+        <p className="font-bold text-2xl font-RobotoCondensed text-base-content">
           {currency} {price?.amount}
         </p>
         <button
           onClick={handleCart}
-          className={`bg-primary text-white py-4 px-8 w-4/5 font-semibold my-5 ${product?.inStock &&
-            "hover:bg-btnHover active:bg-btnActive transition-colors"
-            } disabled:opacity-60`}
+          className="btn btn-primary disabled:opacity-60 w-full mt-4"
           disabled={!product?.inStock || (productAttributesLength > 0 && attrStateLength < productAttributesLength + 6)}
 
           type="button"
         >
           {product?.inStock ? "ADD TO CART" : "OUT OF STOCK"}
         </button>
-        <div className="font-medium tracking-wider p-2 font-Roboto mt-10 leading-6 max-h-56 mb-3 scrollbar">
+        <div className="font-medium tracking-wider p-2 font-Roboto mt-10 leading-6 max-h-56 mb-3 scrollbar text-base-content">
           {product && parse(product.description)}
         </div>
       </section>

@@ -33,14 +33,14 @@ export default function Homepage() {
           Welcome to Scandi-Shop 🎈🎈
         </h2>
         <h3 className="text-2xl font-bold mb-5">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-hoverBackground to-white">
+          <span className="text-base">
             Shop with us today to get value for your money!
           </span>
         </h3></header>
       <main className="text-center px-8">
         <section className="flex">
           <section className="max-w-[30%] shadow-md shadow-dark h-[65vh] px-3 rounded-lg">
-            <h3 className="xl tracking-wider my-4 font-semibold text-text">
+            <h3 className="xl tracking-wider my-4 font-semibold text-base">
               Browse our categories of products:
             </h3>
             <ul className="flex items-stretch flex-col">
@@ -48,7 +48,7 @@ export default function Homepage() {
                 <li key={category}>
                   <button
                     type="button"
-                    className="py-3 text-text mb-4 w-full uppercase border-b-2 border-light hover:opacity-100 transition-all opacity-70 hover:border-primary"
+                    className="py-3 text-secondary mb-4 w-full uppercase border-b-2 border-light hover:opacity-100 transition-all opacity-70 hover:border-primary"
                     onClick={() =>
                       router.push(`/categories?filter=${category}`, undefined, {
                         shallow: true,

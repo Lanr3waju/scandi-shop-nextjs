@@ -11,10 +11,10 @@ export default function Category({ store }) {
       {store?.products.map(({ id, gallery, name, prices, inStock }) => (
         <li
           key={id}
-          className="w-fit h-96 py-5 px-1 hover:shadow-light hover:shadow-md rounded-sm transition-shadow relative"
+          className="w-fit h-96 py-5 px-1 hover:shadow-md text-primary-content rounded-sm transition-shadow relative"
         >
           <span
-            className={`text-3xl font-medium text-overlay absolute top-1/3 left-[18%] -rotate-45 opacity-100 ${
+            className={`text-3xl font-medium text-error-content absolute top-1/3 left-[18%] -rotate-45 opacity-100 ${
               inStock && "hidden"
             }`}
           >

@@ -20,7 +20,7 @@ export default function Categories() {
         <title>Product Listing Page</title>
       </Head>
       <main className="px-14 font-Raleway pt-8 transition-colors">
-        <h2 className="capitalize text-text text-3xl my-10">
+        <h2 className="capitalize text-secondary-focus text-3xl my-10">
           {router.query.filter}
         </h2>
         <Category store={filteredCategory} />
