@@ -47,7 +47,7 @@ export default function Description() {
     const timeout = setTimeout(() => {
       setItemExists(false)
       setItemAdded(false)
-    }, 3000)
+    }, 2000)
 
     return () => {
       clearTimeout(timeout)

@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import AlertError from "../atoms/AlertError"
 import AlertSuccess from "../atoms/AlertSuccess"
+import Modal from "../atoms/Modal"
 
 export default function Cart() {
   const router = useRouter()
@@ -233,7 +234,13 @@ export default function Cart() {
             <section className="font-medium text-xl">
               <h3 className="mb-2 text-secondary">Quantity: <span className="font-bold tracking-wider text-primary font-RobotoCondensed text-primary-content">{totalQuantity}</span></h3>
               <h3 className="text-secondary"> Total: <span className="font-bold tracking-wider font-RobotoCondensed text-primary-content">{currency} {totalPrice}</span> </h3>
-              <button className="btn btn-primary w-1/4 mt-4 text-xl">Order</button>
+              <button className="btn btn-primary w-1/4 mt-4 text-xl " onClick={() => window.my_modal_1.showModal()}>Order</button>
+              <Modal>
+                <h2>You have ordered a total of <span className="text-secondary font-RobotoCondensed font-bold">{totalQuantity}</span> item(s) and it costs a total of <span className="text-secondary font-RobotoCondensed font-bold"> {currency} {totalPrice}</span></h2>
+                <p>Your delivery will be made within 4 - 7 business days depending on your location and our dispatch will get in touch to you.</p>
+                <p>We currently do not support online payments, so please bear with us and prepare the sum of <span className="text-secondary font-RobotoCondensed font-bold"> {currency} {totalPrice}</span> to pay on delivery</p>
+                <h3>Thanks for your patronage 🎉🎊</h3>
+              </Modal>
             </section>
           </>
       }
