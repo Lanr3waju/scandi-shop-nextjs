@@ -1,26 +1,32 @@
-import Head from "next/head"
-import { useRouter } from "next/router"
-import { categories } from "@/components/layout/Header"
-import React, { useState } from "react"
-import "react-responsive-carousel/lib/styles/carousel.min.css"
-import { Carousel } from "react-responsive-carousel"
-import store from "../../data/store.json"
-import Image from "next/image"
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { categories } from "@/components/layout/Header";
+import React, { useState } from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import store from "../../data/store.json";
+import Image from "next/image";
 
 export default function Homepage() {
-  const router = useRouter()
-  const [currentIndex, setCurrentIndex] = useState()
+  const router = useRouter();
+  const [currentIndex, setCurrentIndex] = useState();
 
-  const { products } = store.data.categories.find(({ name }) => name === "all")
+  const { products } = store.data.categories.find(({ name }) => name === "all");
 
   const renderSlides = products.map(({ gallery, name, id }) => (
     <div key={id}>
-      <Image width={500} height={500} className="w-96 h-96 object-contain" src={gallery[0]} alt={name} />
+      <Image
+        width={500}
+        height={500}
+        className="w-96 h-96 object-contain"
+        src={gallery[0]}
+        alt={name}
+      />
     </div>
-  ))
+  ));
 
   function handleChange(index) {
-    setCurrentIndex(index)
+    setCurrentIndex(index);
   }
 
   return (
@@ -36,7 +42,8 @@ export default function Homepage() {
           <span className="text-base">
             Shop with us today to get value for your money!
           </span>
-        </h3></header>
+        </h3>
+      </header>
       <main className="text-center px-8">
         <section className="flex">
           <section className="max-w-[30%] shadow-md shadow-dark h-[65vh] px-3 rounded-lg">
@@ -81,9 +88,9 @@ export default function Homepage() {
         </section>
       </main>
     </>
-  )
+  );
 }
 
 Homepage.getLayout = function PageLayout(page) {
-  return <>{page}</>
-}
+  return <>{page}</>;
+};

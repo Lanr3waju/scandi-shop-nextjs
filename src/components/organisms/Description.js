@@ -1,58 +1,55 @@
-import { useRouter } from "next/router"
-import store from "../../../data/store.json"
-import Image from "next/image"
-import { useState, useEffect } from "react"
-import ImageMagnifier from "@/components/atoms/Magnifier"
-import { ScandiStore } from "../../../context/context"
-import { useContext } from "react"
-import parse from "html-react-parser"
-import AlertError from "../atoms/AlertError"
-import AlertSuccess from "../atoms/AlertSuccess"
+import { useRouter } from "next/router";
+import store from "../../../data/store.json";
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import ImageMagnifier from "@/components/atoms/Magnifier";
+import { ScandiStore } from "../../../context/context";
+import { useContext } from "react";
+import parse from "html-react-parser";
+import AlertError from "../atoms/AlertError";
+import AlertSuccess from "../atoms/AlertSuccess";
 
 export default function Description() {
-  const {
-    currency,
-    setCart,
-  } = useContext(ScandiStore)
-  const router = useRouter()
+  const { currency, setCart } = useContext(ScandiStore);
+  const router = useRouter();
 
   const product = store.data.categories[0].products.find(
     (product) => product.id === router.query.description
-  )
-  const [activeImage, setActiveImage] = useState("/large-placeholder.png")
-  const productNameArr = product?.name.split(" ")
-  const productFirstName = productNameArr && productNameArr[0]
-  const productOtherNames = productNameArr && productNameArr.slice(1).join(" ")
+  );
+  const [activeImage, setActiveImage] = useState("/large-placeholder.png");
+  const productNameArr = product?.name.split(" ");
+  const productFirstName = productNameArr && productNameArr[0];
+  const productOtherNames = productNameArr && productNameArr.slice(1).join(" ");
   const price = product?.prices.find(
     (price) => price.currency.symbol === currency
-  )
+  );
   const [attrState, setAttrState] = useState({
     productId: product?.id,
     image: product?.gallery[0],
     prices: product?.prices,
     name: productNameArr,
     quantity: 1,
-  })
+  });
 
-  const [itemExists, setItemExists] = useState(false)
-  const [itemAdded, setItemAdded] = useState(false)
-  const productAttributesLength = product?.attributes.length
-  const attrStateLength = Object.keys(attrState).length
+  const [itemExists, setItemExists] = useState(false);
+  const [itemAdded, setItemAdded] = useState(false);
+  const productAttributesLength = product?.attributes.length;
+  const attrStateLength = Object.keys(attrState).length;
 
   useEffect(() => {
-    product && setActiveImage(product?.gallery[0])
-  }, [router.query.description])
+    product && setActiveImage(product?.gallery[0]);
+  }, [router.query.description]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setItemExists(false)
-      setItemAdded(false)
-    }, 2000)
+      setItemExists(false);
+      setItemAdded(false);
+    }, 2000);
 
     return () => {
-      clearTimeout(timeout)
-    }
-  }, [itemExists, itemAdded])
+      clearTimeout(timeout);
+    };
+  }, [itemExists, itemAdded]);
 
   const handleProductAttr = (key, value, attributes, images) => {
     setAttrState((prevState) => {
@@ -60,39 +57,39 @@ export default function Description() {
         ...prevState,
         [key]: value,
         attributes: attributes,
-      }
-    })
-  }
+      };
+    });
+  };
 
   const handleCart = () => {
     setCart((prevCart) => {
       if (prevCart.length < 1) {
-        itemExists && setItemExists(false)
-        setItemAdded(true)
-        return [...prevCart, attrState]
+        itemExists && setItemExists(false);
+        setItemAdded(true);
+        return [...prevCart, attrState];
       } else {
         const prod = prevCart.find(
           (item) => JSON.stringify(item) === JSON.stringify(attrState)
-        )
+        );
         if (prod) {
-          itemAdded && setItemAdded(false)
-          setItemExists(true)
-          return prevCart
+          itemAdded && setItemAdded(false);
+          setItemExists(true);
+          return prevCart;
         } else {
-          itemExists && setItemExists(false)
-          setItemAdded(true)
-          return [...prevCart, attrState]
+          itemExists && setItemExists(false);
+          setItemAdded(true);
+          return [...prevCart, attrState];
         }
       }
-    })
-  }
+    });
+  };
 
   return (
     <>
       {itemExists && <AlertError>Item already exists in cart!</AlertError>}
-      {
-        itemAdded && <AlertSuccess>Added item to cart successfully</AlertSuccess>
-      }
+      {itemAdded && (
+        <AlertSuccess>Added item to cart successfully</AlertSuccess>
+      )}
       <section className="w-1/4">
         <ul className="w-full h-[70vh] scrollbar">
           {product?.gallery.map((image) => (
@@ -120,12 +117,16 @@ export default function Description() {
       </section>
       <section className="w-2/5">
         <h2 className="text-2xl">
-          <span className="font-semibold block mb-4 text-secondary-focus">{productFirstName}</span>
+          <span className="font-semibold block mb-4 text-secondary-focus">
+            {productFirstName}
+          </span>
           <span className="text-base-content">{productOtherNames}</span>
         </h2>
         {product?.attributes.map((attr) => (
           <ul className="relative" key={attr.id}>
-            <li className="uppercase font-bold mt-7 text-base-content">{attr.name}:</li>
+            <li className="uppercase font-bold mt-7 text-base-content">
+              {attr.name}:
+            </li>
             <li>
               <ul className="flex flex-wrap w-full">
                 {attr.items.map((item) => (
@@ -142,10 +143,11 @@ export default function Description() {
                             )
                           }
                           aria-label="Product Colors"
-                          className={`w-10 h-10 border-2 flex justify-center items-center my-2 mx-2 ${attrState[attr.name] === item.value
-                            ? "border-secondary"
-                            : "border-transparent"
-                            }`}
+                          className={`w-10 h-10 border-2 flex justify-center items-center my-2 mx-2 ${
+                            attrState[attr.name] === item.value
+                              ? "border-secondary"
+                              : "border-transparent"
+                          }`}
                           name={attr.name}
                           type="button"
                         >
@@ -163,17 +165,18 @@ export default function Description() {
                           handleProductAttr(
                             attr.name,
                             item.value,
-                            product?.attributes,
+                            product?.attributes
                           )
                         }
                         type="button"
                         name={attr.name}
                       >
                         <div
-                            className={`font-SourceSans flex justify-center items-center border-2 border-secondary w-16 h-12 my-2 mx-2 -z-20 relative ${attrState[attr.name] === item.value
+                          className={`font-SourceSans flex justify-center items-center border-2 border-secondary w-16 h-12 my-2 mx-2 -z-20 relative ${
+                            attrState[attr.name] === item.value
                               ? "bg-secondary text-white"
                               : "bg-white text-black"
-                              }`}
+                          }`}
                         >
                           {item.value}
                         </div>
@@ -185,15 +188,20 @@ export default function Description() {
             </li>
           </ul>
         ))}
-        <h3 className="font-RobotoCondensed font-bold mt-7 text-lg text-base-content">PRICE:</h3>
+        <h3 className="font-RobotoCondensed font-bold mt-7 text-lg text-base-content">
+          PRICE:
+        </h3>
         <p className="font-bold text-2xl font-RobotoCondensed text-base-content">
           {currency} {price?.amount}
         </p>
         <button
           onClick={handleCart}
           className="btn btn-primary disabled:opacity-60 w-full mt-4"
-          disabled={!product?.inStock || (productAttributesLength > 0 && attrStateLength < productAttributesLength + 6)}
-
+          disabled={
+            !product?.inStock ||
+            (productAttributesLength > 0 &&
+              attrStateLength < productAttributesLength + 6)
+          }
           type="button"
         >
           {product?.inStock ? "ADD TO CART" : "OUT OF STOCK"}
@@ -203,5 +211,5 @@ export default function Description() {
         </div>
       </section>
     </>
-  )
+  );
 }

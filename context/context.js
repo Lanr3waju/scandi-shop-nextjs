@@ -14,7 +14,9 @@ function Context({ children }) {
   const [cart, setCart] = useState(getCartFromLocalStorage());
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
-  const totalPriceAndQty = cart ? createTotalPriceAndQty(cart, currency) : { totalPrice: 0, totalQuantity: 0 };
+  const totalPriceAndQty = cart
+    ? createTotalPriceAndQty(cart, currency)
+    : { totalPrice: 0, totalQuantity: 0 };
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));

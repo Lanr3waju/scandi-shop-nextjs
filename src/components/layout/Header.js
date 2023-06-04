@@ -23,9 +23,13 @@ function Header({ setOverlay }) {
       <nav className="w-fit">
         <ul className="flex font-Raleway text-text justify-between">
           {categories.map((category) => (
-            <li key={category} className={`${category === filterState &&
-              "border-b-2 border-primary text-primary"
-              }`}>
+            <li
+              key={category}
+              className={`${
+                category === filterState &&
+                "border-b-2 border-primary text-primary"
+              }`}
+            >
               <button
                 type="button"
                 onClick={() =>

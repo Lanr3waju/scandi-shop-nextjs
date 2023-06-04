@@ -3,12 +3,10 @@ const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   daisyui: {
-    themes: [
-      "emerald",
-    ],
+    themes: ["emerald"],
     darkTheme: "emerald",
     lightTheme: "emerald",
-    base: true
+    base: true,
   },
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx}",
@@ -65,6 +63,6 @@ module.exports = {
         },
       });
     }),
-    require('daisyui'),
+    require("daisyui"),
   ],
 };

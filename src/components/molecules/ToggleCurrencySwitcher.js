@@ -19,9 +19,7 @@ export default function ToggleCurrencySwitcher({ setOverlay }) {
       >
         {currency}
         <img
-          className={`inline p-3 ${
-            currencyState && "rotate-180 "
-          }`}
+          className={`inline p-3 ${currencyState && "rotate-180 "}`}
           alt="currency"
           src="/arr-down.png"
         />
