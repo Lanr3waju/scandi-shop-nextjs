@@ -1,32 +1,32 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { categories } from "@/components/layout/Header";
-import React, { useState } from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
-import store from "../../data/store.json";
-import Image from "next/image";
+import Head from "next/head"
+import { useRouter } from "next/router"
+import { categories } from "@/components/layout/Header"
+import React, { useState } from "react"
+import "react-responsive-carousel/lib/styles/carousel.min.css"
+import { Carousel } from "react-responsive-carousel"
+import store from "../../data/store.json"
+import Image from "next/image"
 
 export default function Homepage() {
-  const router = useRouter();
-  const [currentIndex, setCurrentIndex] = useState();
+  const router = useRouter()
+  const [currentIndex, setCurrentIndex] = useState()
 
-  const { products } = store.data.categories.find(({ name }) => name === "all");
+  const { products } = store.data.categories.find(({ name }) => name === "all")
 
   const renderSlides = products.map(({ gallery, name, id }) => (
     <div key={id}>
       <Image
-        width={500}
-        height={500}
-        className="w-96 h-96 object-contain"
-        src={gallery[0]}
         alt={name}
+        className="h-96 w-96 object-contain"
+        height={500}
+        src={gallery[0]}
+        width={500}
       />
     </div>
-  ));
+  ))
 
   function handleChange(index) {
-    setCurrentIndex(index);
+    setCurrentIndex(index)
   }
 
   return (
@@ -34,33 +34,33 @@ export default function Homepage() {
       <Head>
         <title>Homepage</title>
       </Head>
-      <header className="mb-6 bg-primary p-6 text-center shadow-sm shadow-overlay rounded-br-3xl">
-        <h2 className="font-bold text-7xl text-white mb-4">
+      <header className="mb-6 rounded-br-3xl bg-primary p-6 text-center shadow-sm shadow-overlay">
+        <h2 className="mb-4 text-7xl font-bold text-white">
           Welcome to Scandi-Shop 🎈🎈
         </h2>
-        <h3 className="text-2xl font-bold mb-5">
+        <h3 className="mb-5 text-2xl font-bold">
           <span className="text-base">
             Shop with us today to get value for your money!
           </span>
         </h3>
       </header>
-      <main className="text-center px-8">
+      <main className="px-8 text-center">
         <section className="flex">
-          <section className="max-w-[30%] shadow-md shadow-dark h-[65vh] px-3 rounded-lg">
-            <h3 className="xl tracking-wider my-4 font-semibold text-base">
+          <section className="h-[65vh] max-w-[30%] rounded-lg px-3 shadow-md shadow-dark">
+            <h3 className="my-4 text-base font-semibold tracking-wider">
               Browse our categories of products:
             </h3>
-            <ul className="flex items-stretch flex-col">
+            <ul className="flex flex-col items-stretch">
               {categories.map((category) => (
                 <li key={category}>
                   <button
-                    type="button"
-                    className="py-3 text-secondary mb-4 w-full uppercase border-b-2 border-light hover:opacity-100 transition-all opacity-70 hover:border-primary"
+                    className="mb-4 w-full border-b-2 border-light py-3 uppercase text-secondary opacity-70 transition-all hover:border-primary hover:opacity-100"
                     onClick={() =>
                       router.push(`/categories?filter=${category}`, undefined, {
                         shallow: true,
                       })
                     }
+                    type="button"
                   >
                     {category}
                   </button>
@@ -68,18 +68,18 @@ export default function Homepage() {
               ))}
             </ul>
           </section>
-          <section className="max-w-[60%] p-3 ml-4">
-            <div className="flex justify-center max-h-fit">
+          <section className="ml-4 max-w-[60%] p-3">
+            <div className="flex max-h-fit justify-center">
               <Carousel
-                showArrows={false}
-                autoPlay={true}
-                infiniteLoop={true}
-                selectedItem={products[currentIndex]}
-                onChange={handleChange}
                 autoFocus={true}
+                autoPlay={true}
+                className="h-1/3 w-3/4"
                 emulateTouch={true}
+                infiniteLoop={true}
+                onChange={handleChange}
+                selectedItem={products[currentIndex]}
+                showArrows={false}
                 stopOnHover={false}
-                className="w-3/4 h-1/3"
               >
                 {renderSlides}
               </Carousel>
@@ -88,9 +88,9 @@ export default function Homepage() {
         </section>
       </main>
     </>
-  );
+  )
 }
 
 Homepage.getLayout = function PageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

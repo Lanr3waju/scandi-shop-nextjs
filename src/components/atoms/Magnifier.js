@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { useState } from "react";
+import Image from "next/image"
+import { useState } from "react"
 
 export default function ImageMagnifier({
   src,
@@ -9,31 +9,31 @@ export default function ImageMagnifier({
   magnifierWidth = 150,
   zoomLevel = 2.0,
 }) {
-  const [[x, y], setXY] = useState([0, 0]);
-  const [[imgWidth, imgHeight], setSize] = useState([0, 0]);
-  const [showMagnifier, setShowMagnifier] = useState(false);
+  const [[x, y], setXY] = useState([0, 0])
+  const [[imgWidth, imgHeight], setSize] = useState([0, 0])
+  const [showMagnifier, setShowMagnifier] = useState(false)
   return (
     <div
       onMouseEnter={(e) => {
         // update image size and turn-on magnifier
-        const elem = e.currentTarget;
-        const { width, height } = elem.getBoundingClientRect();
-        setSize([width, height]);
-        setShowMagnifier(true);
-      }}
-      onMouseMove={(e) => {
-        // update cursor position
-        const elem = e.currentTarget;
-        const { top, left } = elem.getBoundingClientRect();
-
-        // calculate cursor position on the image
-        const x = e.pageX - left - window.scrollX;
-        const y = e.pageY - top - window.scrollY;
-        setXY([x, y]);
+        const elem = e.currentTarget
+        const { width, height } = elem.getBoundingClientRect()
+        setSize([width, height])
+        setShowMagnifier(true)
       }}
       onMouseLeave={() => {
         // close magnifier
-        setShowMagnifier(false);
+        setShowMagnifier(false)
+      }}
+      onMouseMove={(e) => {
+        // update cursor position
+        const elem = e.currentTarget
+        const { top, left } = elem.getBoundingClientRect()
+
+        // calculate cursor position on the image
+        const x = e.pageX - left - window.scrollX
+        const y = e.pageY - top - window.scrollY
+        setXY([x, y])
       }}
       style={{
         position: "relative",
@@ -42,15 +42,15 @@ export default function ImageMagnifier({
       }}
     >
       <Image
-        width={width}
+        alt="Product Image"
+        blurDataURL="/large-placeholder.png"
+        className="relative -z-10 h-4/5 w-full object-contain"
         height={height}
+        placeholder="blur"
         priority
         src={src}
-        placeholder="blur"
-        blurDataURL="/large-placeholder.png"
-        alt="Product Image"
-        className="w-full h-4/5 object-contain relative -z-10"
         style={{ height: height, width: width }}
+        width={width}
       />
 
       <div
@@ -84,5 +84,5 @@ export default function ImageMagnifier({
         }}
       ></div>
     </div>
-  );
+  )
 }

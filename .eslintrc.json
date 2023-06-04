@@ -1,3 +1,49 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true,
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:tailwindcss/recommended",
+    "airbnb/hooks"
+  ],
+  "plugins": [
+    "unused-imports",
+    "react"
+  ],
+  "rules": {
+    "tailwind/classnames-order": "off",
+    "max-len": [
+      "warn",
+      120,
+      2,
+      {
+        "ignoreComments": false,
+        "ignoreRegExpLiterals": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreUrls": true
+      }
+    ],
+    "no-console": "error", // use custom logger
+    "react-hooks/exhaustive-deps": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-sort-props": [
+      "error",
+      {
+        "callbacksLast": false,
+        "shorthandFirst": false,
+        "shorthandLast": false,
+        "ignoreCase": true,
+        "noSortAlphabetically": false
+      }
+    ],
+    "react/prop-types": "off",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-filename-extension": "off",
+    "semi": ["error", "never"],
+    "unused-imports/no-unused-imports": "error"
+  }
 }

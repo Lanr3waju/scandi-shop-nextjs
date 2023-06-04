@@ -1,26 +1,26 @@
-import { useState, useEffect } from "react";
-import { ScandiStore } from "../../../context/context";
-import { useContext } from "react";
-import CurrencySwitcher from "../atoms/CurrencySwitcher";
+import { useState, useEffect } from "react"
+import { ScandiStore } from "../../../context/context"
+import { useContext } from "react"
+import CurrencySwitcher from "../atoms/CurrencySwitcher"
 
 export default function ToggleCurrencySwitcher({ setOverlay }) {
-  const [currencyState, setCurrencyState] = useState(false);
-  const { currency } = useContext(ScandiStore);
+  const [currencyState, setCurrencyState] = useState(false)
+  const { currency } = useContext(ScandiStore)
 
   useEffect(() => {
-    setOverlay(currencyState);
-  }, [currencyState]);
+    setOverlay(currencyState)
+  }, [currencyState])
   return (
     <>
       <button
-        type="button"
-        className="font-Raleway font-medium text-lg"
+        className="font-Raleway text-lg font-medium"
         onClick={() => setCurrencyState(!currencyState)}
+        type="button"
       >
         {currency}
         <img
-          className={`inline p-3 ${currencyState && "rotate-180 "}`}
           alt="currency"
+          className={`inline p-3 ${currencyState && "rotate-180 "}`}
           src="/arr-down.png"
         />
       </button>
@@ -28,5 +28,5 @@ export default function ToggleCurrencySwitcher({ setOverlay }) {
         <CurrencySwitcher setCurrencyState={setCurrencyState} />
       )}
     </>
-  );
+  )
 }
