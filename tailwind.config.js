@@ -3,9 +3,9 @@ const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   daisyui: {
-    themes: ["emerald"],
-    darkTheme: "emerald",
-    lightTheme: "emerald",
+    themes: ["cmyk"],
+    darkTheme: "cmyk",
+    lightTheme: "cmyk",
     base: true,
   },
   content: [

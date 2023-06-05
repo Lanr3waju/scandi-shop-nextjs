@@ -34,9 +34,9 @@ export default function Homepage() {
       <Head>
         <title>Homepage</title>
       </Head>
-      <header className="mb-6 rounded-br-3xl bg-primary p-6 text-center shadow-sm shadow-overlay">
+      <header className="mb-6 rounded-br-3xl bg-primary p-6 text-center shadow-sm shadow-overlay ">
         <h2 className="mb-4 text-7xl font-bold text-white">
-          Welcome to Scandi-Shop 🎈🎈
+          Welcome to Scandi-Shop 🎈
         </h2>
         <h3 className="mb-5 text-2xl font-bold">
           <span className="text-base">
@@ -79,6 +79,7 @@ export default function Homepage() {
                 onChange={handleChange}
                 selectedItem={products[currentIndex]}
                 showArrows={false}
+                showThumbs={false}
                 stopOnHover={false}
               >
                 {renderSlides}

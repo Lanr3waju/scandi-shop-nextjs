@@ -100,7 +100,6 @@ export default function Cart() {
     const productFirstName = item.name[0]
     const productOtherNames = item.name.slice(1).join(" ")
     return (
-      <>
         <section
           className="mb-4 flex w-full items-center justify-between border-b-4 border-primary"
           key={key}
@@ -165,11 +164,10 @@ export default function Cart() {
                               type="button"
                           >
                             <div
-                                className={`relative -z-20 m-2 flex h-10 w-12 items-center justify-center border-2 border-black font-SourceSans${
-                                item[attr.name] === attrItem.value
+                                className={`${item[attr.name] === attrItem.value
                                   ? "bg-black text-white"
                                   : "bg-white text-black"
-                              }`}
+                                  } relative -z-20 m-2 flex h-10 w-12 items-center justify-center border-2 border-black font-SourceSans`}
                             >
                               {attrItem.value}
                             </div>
@@ -227,8 +225,7 @@ export default function Cart() {
               remove Item
             </button>
           </section>
-        </section>
-      </>
+      </section>
     )
   })
 
@@ -273,10 +270,10 @@ export default function Cart() {
                   <span className="font-RobotoCondensed font-bold text-secondary">
                   {totalQuantity}
                 </span>{" "}
-                item(s) and it costs a total of{" "}
+                  item(s) which cost(s) a total of{" "}
                   <span className="font-RobotoCondensed font-bold text-secondary">
                   {" "}
-                  {currency} {totalPrice}
+                    {currency}{totalPrice}
                 </span>
               </h2>
               <p>
@@ -288,7 +285,7 @@ export default function Cart() {
                 us and prepare the sum of{" "}
                   <span className="font-RobotoCondensed font-bold text-secondary">
                   {" "}
-                  {currency} {totalPrice}
+                    {currency}{totalPrice}
                 </span>{" "}
                 to pay on delivery
               </p>
