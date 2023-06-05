@@ -7,7 +7,7 @@ export default function DescriptionPage() {
       <Head>
         <title>Description Page</title>
       </Head>
-      <main className="flex p-14 font-Raleway text-primary">
+      <main className="hidden md:flex p-14 font-Raleway text-primary">
         <Description />
       </main>
     </>

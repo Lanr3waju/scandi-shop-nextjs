@@ -15,16 +15,16 @@ export default function Categories() {
   }
 
   return (
-    <div>
+    <>
       <Head>
         <title>Product Listing Page</title>
       </Head>
-      <main className="px-14 pt-8 font-Raleway transition-colors">
+      <main className="px-14 pt-8 font-Raleway transition-colors hidden md:block">
         <h2 className="my-10 text-3xl capitalize text-primary-content">
           {router.query.filter}
         </h2>
         <Category store={filteredCategory} />
       </main>
-    </div>
+    </>
   )
 }

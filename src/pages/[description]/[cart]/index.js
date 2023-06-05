@@ -8,7 +8,7 @@ export default function CartPage() {
       <Head>
         <title>Cart Page</title>
       </Head>
-      <main className="p-14 font-Raleway text-primary">
+      <main className="p-14 font-Raleway text-primary hidden md:block">
         <h2 className="my-10 border-b-4 border-secondary-content text-3xl font-bold capitalize text-primary-content">
           CART
         </h2>

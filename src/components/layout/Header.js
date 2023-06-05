@@ -5,6 +5,7 @@ import store from "../../../data/store.json"
 import ToggleCurrencySwitcher from "../molecules/ToggleCurrencySwitcher"
 import { useEffect, useState } from "react"
 import CartBtn from "../atoms/CartBtn"
+import MobileMessage from "../atoms/MobileMessage"
 
 export const categories = store.data.categories.map(
   (category) => category.name
@@ -19,48 +20,50 @@ function Header({ setOverlay }) {
   }, [router.query.filter])
 
   return (
-    <header className="sticky top-0 z-50 flex w-full items-center justify-between border-t-4 border-primary bg-white px-14">
-      <nav className="w-fit">
-        <ul className="flex justify-between font-Raleway text-text">
-          {categories.map((category) => (
-            <li
-              className={`${
-                category === filterState &&
-                "border-b-2 border-primary text-primary"
-              }`}
-              key={category}
-            >
-              <button
-                className="p-4 font-medium uppercase"
-                onClick={() =>
-                  router.push(`/categories?filter=${category}`, undefined, {
-                    shallow: true,
-                  })
-                }
-                type="button"
+    <>
+      <MobileMessage />
+      <header className="sticky top-0 z-50 w-full items-center justify-between border-t-4 border-primary bg-white px-14 hidden md:flex">
+        <nav className="w-fit">
+          <ul className="flex justify-between font-Raleway text-text">
+            {categories.map((category) => (
+              <li
+                className={`${category === filterState &&
+                  "border-b-2 border-primary text-primary"
+                  }`}
+                key={category}
               >
-                {category}
-              </button>
-            </li>
-          ))}
+                <button
+                  className="p-4 font-medium uppercase"
+                  onClick={() =>
+                    router.push(`/categories?filter=${category}`, undefined, {
+                      shallow: true,
+                    })
+                  }
+                  type="button"
+                >
+                  {category}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <Link href="/">
+          <Image
+            alt="logo"
+            className="h-9 w-9 object-contain"
+            height={40}
+            src="/logo.png"
+            width={40}
+          />
+        </Link>
+        <ul className="relative flex w-fit items-center justify-around">
+          <li className="p-4">
+            <ToggleCurrencySwitcher setOverlay={setOverlay} />
+          </li>
+          <CartBtn />
         </ul>
-      </nav>
-      <Link href="/">
-        <Image
-          alt="logo"
-          className="h-9 w-9 object-contain"
-          height={40}
-          src="/logo.png"
-          width={40}
-        />
-      </Link>
-      <ul className="relative flex w-fit items-center justify-around">
-        <li className="p-4">
-          <ToggleCurrencySwitcher setOverlay={setOverlay} />
-        </li>
-        <CartBtn />
-      </ul>
-    </header>
+      </header>
+    </>
   )
 }
 
