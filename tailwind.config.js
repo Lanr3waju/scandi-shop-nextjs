@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const plugin = require("tailwindcss/plugin");
+const plugin = require("tailwindcss/plugin")
 
 module.exports = {
   daisyui: {
@@ -61,8 +61,8 @@ module.exports = {
         ".scrollbar::-webkit-scrollbar-track-piece": {
           backgroundColor: "transparent",
         },
-      });
+      })
     }),
     require("daisyui"),
   ],
-};
+}
