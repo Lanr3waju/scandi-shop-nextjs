@@ -1,65 +1,70 @@
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import Link from "next/link";
-import store from "../../../data/store.json";
-import ToggleCurrencySwitcher from "../molecules/ToggleCurrencySwitcher";
+import { useRouter } from "next/router"
+import Image from "next/image"
+import Link from "next/link"
+import store from "../../../data/store.json"
+import ToggleCurrencySwitcher from "../molecules/ToggleCurrencySwitcher"
+import { useEffect, useState } from "react"
+import CartBtn from "../atoms/CartBtn"
+import MobileMessage from "../atoms/MobileMessage"
 
 export const categories = store.data.categories.map(
   (category) => category.name
-);
+)
 
 function Header({ setOverlay }) {
-  const router = useRouter();
-  const [filterState, setFilterState] = useState(categories[0]);
+  const router = useRouter()
+  const [filterState, setFilterState] = useState(categories[0])
 
   useEffect(() => {
-    setFilterState(router.query.filter);
-  }, [router.query.filter]);
+    setFilterState(router.query.filter)
+  }, [router.query.filter])
 
   return (
-    <header className="sticky top-0 border-t-4 border-primary bg-white w-full flex justify-between items-center px-14 z-50">
-      <nav className="w-1/4">
-        <ul className="flex font-Raleway text-text">
-          {categories.map((category) => (
-            <li key={category}>
-              <button
-                type="button"
-                onClick={() =>
-                  router.push(`/categories?filter=${category}`, undefined, {
-                    shallow: true,
-                  })
-                }
-                className={`p-4 uppercase mr-4 ${
-                  category === filterState &&
+    <>
+      <MobileMessage />
+      <header className="sticky top-0 z-50 w-full items-center justify-between border-t-4 border-primary bg-white px-14 hidden md:flex">
+        <nav className="w-fit">
+          <ul className="flex justify-between font-Raleway text-text">
+            {categories.map((category) => (
+              <li
+                className={`${category === filterState &&
                   "border-b-2 border-primary text-primary"
-                }`}
+                  }`}
+                key={category}
               >
-                {category}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <Link href="/">
-        <Image src="/logo.png" width={35} height={35} alt="logo" />
-      </Link>
-      <ul className="flex w-1/3 justify-end items-center">
-        <li>
-          <ToggleCurrencySwitcher setOverlay={setOverlay} />
-        </li>
-        <li>
+                <button
+                  className="p-4 font-medium uppercase"
+                  onClick={() =>
+                    router.push(`/categories?filter=${category}`, undefined, {
+                      shallow: true,
+                    })
+                  }
+                  type="button"
+                >
+                  {category}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <Link href="/">
           <Image
-            src="/cart.png"
-            className="ml-8"
-            width={22}
-            height={19}
-            alt="cart"
+            alt="logo"
+            className="h-9 w-9 object-contain"
+            height={40}
+            src="/logo.png"
+            width={40}
           />
-        </li>
-      </ul>
-    </header>
-  );
+        </Link>
+        <ul className="relative flex w-fit items-center justify-around">
+          <li className="p-4">
+            <ToggleCurrencySwitcher setOverlay={setOverlay} />
+          </li>
+          <CartBtn />
+        </ul>
+      </header>
+    </>
+  )
 }
 
-export default Header;
+export default Header

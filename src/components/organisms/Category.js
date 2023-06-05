@@ -1,20 +1,20 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ScandiStore } from "../../../context/context";
-import { useContext } from "react";
+import Image from "next/image"
+import Link from "next/link"
+import { ScandiStore } from "../../../context/context"
+import { useContext } from "react"
 
 export default function Category({ store }) {
-  const { currency } = useContext(ScandiStore);
+  const { currency } = useContext(ScandiStore)
 
   return (
-    <ul className="flex flex-wrap justify-start gap-20 pb-5 min-h-screen">
+    <ul className="flex min-h-screen w-full flex-wrap gap-4 pb-5">
       {store?.products.map(({ id, gallery, name, prices, inStock }) => (
         <li
+          className="relative h-96 w-fit rounded-sm px-1 py-5 text-primary-content transition-shadow hover:shadow-md"
           key={id}
-          className="w-80 h-96 shadow-lg rounded-lg p-6 shadow-overlay hover:shadow-overlay hover:shadow-md transition-shadow relative"
         >
           <span
-            className={`text-3xl font-medium text-overlay absolute top-1/3 left-[18%] -rotate-45 opacity-100 ${
+            className={`absolute left-[18%] top-1/3 -rotate-45 text-3xl font-medium text-error-content opacity-100 ${
               inStock && "hidden"
             }`}
           >
@@ -23,25 +23,25 @@ export default function Category({ store }) {
           <Link href={`/${id}`}>
             <section className={`relative -z-30 ${!inStock && "opacity-40"}`}>
               <Image
-                className="w-64 h-72 object-contain border-b-2 border-primary pb-2"
-                src={gallery[0]}
-                width={330}
-                height={340}
-                placeholder={true}
                 alt={name}
+                className="h-72 w-72 object-contain pb-2"
+                height={300}
+                placeholder={true}
+                src={gallery[0]}
+                width={300}
               />
-              <h2 className="opacity-80 my-3">
+              <h2 className="my-3 opacity-80">
                 {name}
                 {prices.map((price) => {
                   if (price.currency.symbol === currency) {
                     return (
                       <span
+                        className="block font-Inter tracking-wide"
                         key={price.amount}
-                        className="font-Inter block tracking-wide"
                       >
                         {price.currency.symbol} {price.amount}
                       </span>
-                    );
+                    )
                   }
                 })}
               </h2>
@@ -50,5 +50,5 @@ export default function Category({ store }) {
         </li>
       ))}
     </ul>
-  );
+  )
 }

@@ -1,5 +1,5 @@
-import Head from "next/head";
-import Description from "@/components/organisms/Description";
+import Head from "next/head"
+import Description from "@/components/organisms/Description"
 
 export default function DescriptionPage() {
   return (
@@ -7,9 +7,9 @@ export default function DescriptionPage() {
       <Head>
         <title>Description Page</title>
       </Head>
-      <main className="flex p-14 font-Raleway text-text">
+      <main className="hidden md:flex p-14 font-Raleway text-primary">
         <Description />
       </main>
     </>
-  );
+  )
 }
