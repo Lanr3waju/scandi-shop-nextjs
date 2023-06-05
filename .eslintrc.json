@@ -5,10 +5,7 @@
     "eslint:recommended",
     "airbnb/hooks"
   ],
-  "plugins": [
-    "unused-imports",
-    "react"
-  ],
+  "plugins": ["unused-imports", "react"],
   "rules": {
     "tailwind/classnames-order": "off",
     "max-len": [

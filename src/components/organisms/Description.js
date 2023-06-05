@@ -87,7 +87,9 @@ export default function Description() {
   return (
     <>
       {itemExists && <AlertError>Item already exists in cart!</AlertError>}
-      {itemAdded && <AlertSuccess>Added item to cart successfully</AlertSuccess>}
+      {itemAdded && (
+        <AlertSuccess>Added item to cart successfully</AlertSuccess>
+      )}
       <section className="w-1/4">
         <ul className="scrollbar h-[70vh] w-full">
           {product?.gallery.map((image) => (
@@ -133,10 +135,11 @@ export default function Description() {
                       <div>
                         <button
                           aria-label="Product Colors"
-                          className={`${attrState[attr.name] === item.value
-                            ? "border-primary"
-                            : "border-transparent"
-                            } m-2 flex h-10 w-10 items-center justify-center border-2`}
+                          className={`${
+                            attrState[attr.name] === item.value
+                              ? "border-primary"
+                              : "border-transparent"
+                          } m-2 flex h-10 w-10 items-center justify-center border-2`}
                           name={attr.name}
                           onClick={() =>
                             handleProductAttr(
@@ -158,7 +161,7 @@ export default function Description() {
                       </div>
                     ) : (
                       <button
-                          name={attr.name}
+                        name={attr.name}
                         onClick={() =>
                           handleProductAttr(
                             attr.name,
@@ -166,10 +169,14 @@ export default function Description() {
                             product?.attributes
                           )
                         }
-                          type="button"
+                        type="button"
                       >
                         <div
-                            className={`${attrState[attr.name] === item.value ? "bg-black text-white" : "bg-white text-black"} relative -z-20 m-2 flex h-12 w-16 items-center justify-center border-2 border-black font-SourceSans`}
+                          className={`${
+                            attrState[attr.name] === item.value
+                              ? "bg-black text-white"
+                              : "bg-white text-black"
+                          } relative -z-20 m-2 flex h-12 w-16 items-center justify-center border-2 border-black font-SourceSans`}
                         >
                           {item.value}
                         </div>

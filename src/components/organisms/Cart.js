@@ -100,131 +100,129 @@ export default function Cart() {
     const productFirstName = item.name[0]
     const productOtherNames = item.name.slice(1).join(" ")
     return (
-        <section
-          className="mb-4 flex w-full items-center justify-between border-b-4 border-primary"
-          key={key}
-        >
-          <div>
-            <section className="flex">
-              <article>
-                <h2 className="text-xl">
-                  <span className="mb-2 font-semibold text-secondary">
-                    {productFirstName}
-                  </span>{" "}
-                  <span className="text-primary-content">
-                    {productOtherNames}
-                  </span>
-                </h2>
-                <h3 className="my-2 font-RobotoCondensed text-lg font-bold text-base-content">
-                  {currency} {price.amount}
-                </h3>
-              </article>
-            </section>
-            {item.attributes?.map((attr) => (
-              <ul className="relative" key={attr.id}>
-                <li className="mt-7 font-bold uppercase text-primary-content">
-                  {attr.name}:
-                </li>
-                <li>
-                  <ul className="flex w-full flex-wrap">
-                    {attr.items.map((attrItem) => (
-                      <li key={attrItem.id}>
-                        {attr.type === "swatch" ? (
-                          <div>
-                            <button
-                              aria-label="Product Colors"
-                              className={`m-1 flex h-10 w-10 items-center justify-center border-2 text-lg ${item[attr.name] === attrItem.value
+      <section
+        className="mb-4 flex w-full items-center justify-between border-b-4 border-primary"
+        key={key}
+      >
+        <div>
+          <section className="flex">
+            <article>
+              <h2 className="text-xl">
+                <span className="mb-2 font-semibold text-secondary">
+                  {productFirstName}
+                </span>{" "}
+                <span className="text-primary-content">
+                  {productOtherNames}
+                </span>
+              </h2>
+              <h3 className="my-2 font-RobotoCondensed text-lg font-bold text-base-content">
+                {currency} {price.amount}
+              </h3>
+            </article>
+          </section>
+          {item.attributes?.map((attr) => (
+            <ul className="relative" key={attr.id}>
+              <li className="mt-7 font-bold uppercase text-primary-content">
+                {attr.name}:
+              </li>
+              <li>
+                <ul className="flex w-full flex-wrap">
+                  {attr.items.map((attrItem) => (
+                    <li key={attrItem.id}>
+                      {attr.type === "swatch" ? (
+                        <div>
+                          <button
+                            aria-label="Product Colors"
+                            className={`m-1 flex h-10 w-10 items-center justify-center border-2 text-lg ${
+                              item[attr.name] === attrItem.value
                                 ? "border-primary"
                                 : "border-transparent"
-                                }`}
-                              name={attr.name}
-                              onClick={() =>
-                                handleProductAttr(
-                                  attr.name,
-                                  attrItem.value,
-                                  item
-                                )
-                              }
-                              type="button"
-                            >
-                              <div
-                                className="absolute -z-10 m-1 flex h-8 w-8 items-center justify-center"
-                                style={{
-                                  backgroundColor: attrItem.value,
-                                }}
-                              />
-                            </button>
-                          </div>
-                        ) : (
-                          <button
-                              name={attr.name}
+                            }`}
+                            name={attr.name}
                             onClick={() =>
                               handleProductAttr(attr.name, attrItem.value, item)
                             }
-                              type="button"
+                            type="button"
                           >
                             <div
-                                className={`${item[attr.name] === attrItem.value
-                                  ? "bg-black text-white"
-                                  : "bg-white text-black"
-                                  } relative -z-20 m-2 flex h-10 w-12 items-center justify-center border-2 border-black font-SourceSans`}
-                            >
-                              {attrItem.value}
-                            </div>
+                              className="absolute -z-10 m-1 flex h-8 w-8 items-center justify-center"
+                              style={{
+                                backgroundColor: attrItem.value,
+                              }}
+                            />
                           </button>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              </ul>
-            ))}
+                        </div>
+                      ) : (
+                        <button
+                          name={attr.name}
+                          onClick={() =>
+                            handleProductAttr(attr.name, attrItem.value, item)
+                          }
+                          type="button"
+                        >
+                          <div
+                            className={`${
+                              item[attr.name] === attrItem.value
+                                ? "bg-black text-white"
+                                : "bg-white text-black"
+                            } relative -z-20 m-2 flex h-10 w-12 items-center justify-center border-2 border-black font-SourceSans`}
+                          >
+                            {attrItem.value}
+                          </div>
+                        </button>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            </ul>
+          ))}
+        </div>
+        <section className="flex flex-col items-center">
+          <div className="flex items-center justify-between">
+            <button
+              className="rounded-sm bg-primary px-3 text-xl font-semibold text-white transition-all hover:bg-dark active:translate-y-1"
+              onClick={() => decreaseProductQty(item)}
+            >
+              -
+            </button>
+            <p className="mx-4 font-Raleway text-3xl font-semibold text-secondary">
+              {item.quantity}
+            </p>
+            <button
+              className="rounded-sm bg-primary px-3 text-xl font-semibold text-white transition-all hover:bg-dark active:translate-y-1"
+              onClick={() => increaseProductQty(item)}
+            >
+              +
+            </button>
           </div>
-          <section className="flex flex-col items-center">
-            <div className="flex items-center justify-between">
-              <button
-                className="rounded-sm bg-primary px-3 text-xl font-semibold text-white transition-all hover:bg-dark active:translate-y-1"
-                onClick={() => decreaseProductQty(item)}
-              >
-                -
-              </button>
-              <p className="mx-4 font-Raleway text-3xl font-semibold text-secondary">
-                {item.quantity}
-              </p>
-              <button
-                className="rounded-sm bg-primary px-3 text-xl font-semibold text-white transition-all hover:bg-dark active:translate-y-1"
-                onClick={() => increaseProductQty(item)}
-              >
-                +
-              </button>
-            </div>
-            <button
+          <button
+            onClick={() => {
+              router.push(`/${item.productId}`)
+            }}
+          >
+            <Image
+              alt="product"
+              blurDataURL="/small-placeholder.png"
+              className="relative -z-30 h-40 w-40 cursor-pointer object-contain"
+              height={170}
               onClick={() => {
-                router.push(`/${item.productId}`)
+                useRouter
               }}
-            >
-              <Image
-                alt="product"
-                blurDataURL="/small-placeholder.png"
-                className="relative -z-30 h-40 w-40 cursor-pointer object-contain"
-                height={170}
-                onClick={() => {
-                  useRouter
-                }}
-                placeholder="blur"
-                priority
-                src={item.image}
-                width={170}
-              />
-            </button>
-            <button
-              className="btn-error btn-outline btn my-2 py-1 lowercase"
-              onClick={() => removeProduct(item)}
-              type="button"
-            >
-              remove Item
-            </button>
-          </section>
+              placeholder="blur"
+              priority
+              src={item.image}
+              width={170}
+            />
+          </button>
+          <button
+            className="btn-error btn-outline btn my-2 py-1 lowercase"
+            onClick={() => removeProduct(item)}
+            type="button"
+          >
+            remove Item
+          </button>
+        </section>
       </section>
     )
   })
@@ -244,22 +242,22 @@ export default function Cart() {
           {itemRemoved && (
             <AlertSuccess>Item removed successfully</AlertSuccess>
           )}
-            <section className="text-xl font-medium">
+          <section className="text-xl font-medium">
             <h3 className="mb-2 text-secondary">
               Quantity:{" "}
-                <span className="font-RobotoCondensed font-bold tracking-wider text-primary-content">
+              <span className="font-RobotoCondensed font-bold tracking-wider text-primary-content">
                 {totalQuantity}
               </span>
             </h3>
             <h3 className="text-secondary">
               {" "}
               Total:{" "}
-                <span className="font-RobotoCondensed font-bold tracking-wider text-primary-content">
+              <span className="font-RobotoCondensed font-bold tracking-wider text-primary-content">
                 {currency} {totalPrice}
               </span>{" "}
             </h3>
             <button
-                className="btn-primary btn mt-4 w-1/4 text-xl "
+              className="btn-primary btn mt-4 w-1/4 text-xl "
               onClick={() => window.my_modal_1.showModal()}
             >
               Order
@@ -267,13 +265,14 @@ export default function Cart() {
             <Modal>
               <h2>
                 You have ordered a total of{" "}
-                  <span className="font-RobotoCondensed font-bold text-secondary">
+                <span className="font-RobotoCondensed font-bold text-secondary">
                   {totalQuantity}
                 </span>{" "}
-                  item(s) which cost(s) a total of{" "}
-                  <span className="font-RobotoCondensed font-bold text-secondary">
+                item(s) which cost(s) a total of{" "}
+                <span className="font-RobotoCondensed font-bold text-secondary">
                   {" "}
-                    {currency}{totalPrice}
+                  {currency}
+                  {totalPrice}
                 </span>
               </h2>
               <p>
@@ -283,9 +282,10 @@ export default function Cart() {
               <p>
                 We currently do not support online payments, so please bear with
                 us and prepare the sum of{" "}
-                  <span className="font-RobotoCondensed font-bold text-secondary">
+                <span className="font-RobotoCondensed font-bold text-secondary">
                   {" "}
-                    {currency}{totalPrice}
+                  {currency}
+                  {totalPrice}
                 </span>{" "}
                 to pay on delivery
               </p>
