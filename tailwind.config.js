@@ -61,6 +61,22 @@ module.exports = {
         ".scrollbar::-webkit-scrollbar-track-piece": {
           backgroundColor: "transparent",
         },
+        ".scrollbarX": {
+          overflowX: "auto",
+          scrollbarColor: "#5ECE7B",
+          scrollbarWidth: "small",
+        },
+        ".scrollbarX::-webkit-scrollbar": {
+          width: "2px",
+          height: "3px"
+        },
+        ".scrollbarX::-webkit-scrollbar-thumb": {
+          backgroundColor: "#5ECE7B",
+          borderRadius: 15,
+        },
+        ".scrollbarX::-webkit-scrollbar-track-piece": {
+          backgroundColor: "transparent",
+        },
       })
     }),
     require("daisyui"),

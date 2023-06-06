@@ -257,7 +257,7 @@ export default function Cart() {
               </span>{" "}
             </h3>
             <button
-              className="btn-primary btn mt-4 w-1/4 text-xl "
+                className="btn-primary btn mt-4 md:w-1/4 text-xl w-full "
               onClick={() => window.my_modal_1.showModal()}
             >
               Order

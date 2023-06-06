@@ -45,7 +45,7 @@ function Header({ setOverlay }) {
         </div>
         <HamburgerButton isOpen={isOpen} setIsOpen={handleClick} />
       </header>
-      {isOpen && <MobileMenu categories={categories} setOverlay={setOverlay} />}
+      {isOpen && <MobileMenu categories={categories} setIsOpen={handleClick} setOverlay={setOverlay} />}
     </>
   )
 }

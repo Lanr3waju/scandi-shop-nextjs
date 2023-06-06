@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <div className={`${overlay && "z-50 bg-overlay"}`}>
+      <div className={`${overlay ? "z-50 bg-overlay" : ""}`}>
         <Context>
           <Header setOverlay={setOverlay} />
           <Component {...pageProps} />

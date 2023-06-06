@@ -7,7 +7,7 @@ const HamburgerButton = ({ isOpen, setIsOpen }) => {
         >
             {/* Hamburger lines */}
             <div className={`w-5 h-0.5 bg-primary transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-1.5' : ''}`}></div>
-            <div className={`w-5 h-0.5 bg-primary my-1 transition-all duration-300 opacity-100 ${isOpen ? 'opacity-0' : ''}`}></div>
+            <div className={`w-5 h-0.5 bg-primary my-1 transition-all duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></div>
             <div className={`w-5 h-0.5 bg-primary transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></div>
         </button>
     )
