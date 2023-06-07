@@ -1,42 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SCANDI-SHOP
 
-## Getting Started
+> This is an prototype e-commerce app with components / pages such as the homepage, category page, description page, cart page built with Next.js.
+ > This app is inspired by a frontend test assessment from scandiweb, and as such, the data used and design is that of the test assessment by scandiweb.
 
-First, run the development server:
+![screenshot](./public/preview.png)
+
+## Built With
+
+- NextJS
+  - NextJS shallow routing
+  - NextJS Image component
+
+- React
+  - JSX
+  - React Context API
+  - React Responsive Carousel Library
+
+  - Hooks
+    - useState
+    - useEffect
+    - useContext
+
+- Tailwind CSS
+  - DaisyUi plugin
+
+[Live demo link](https://scandi-shop-nextjs.vercel.app/)
+
+### Development (Running locally)
+
+- Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+git clone https://github.com/Lanr3waju/scandi-shop-nextjs.git
+
 ```
 
-## Live Demo
+- Install Dependencies
 
-[Demo](https://scandi-shop-nextjs.vercel.app/)
+```bash
+yarn install
+```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To automatically fix eslint issues found (where possible):
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```bash
+yarn run lint
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## 👤 Author
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Github: [@Lanr3waju](https://github.com/Lanr3waju>)
+- LinkedIn: [@Abass Olanrewaju](https://www.linkedin.com/in/lanr3waju/)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 🤝 Contributing
 
-## Learn More
+Contributions, issues and feature requests are welcome!
 
-To learn more about Next.js, take a look at the following resources:
+Feel free to check the [issues page](../../issues).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Show your support
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Give a ⭐️ if you like this project!
 
-## Deploy on Vercel
+## Acknowledgments and Resources used
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Icons8](https://icons8.com/)
+- [daisyUI](https://daisyui.com/)
+- [Scandiweb](https://scandiweb.com/)
+- [Leandrowd React Responsive Carousel](https://github.com/leandrowd/react-responsive-carousel.git)
+- [Anxiny Image Magnifier](https://dev.to/anxiny/create-an-image-magnifier-with-react-3fd7)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 📝 License
+
+[MIT licensed](./LICENSE).

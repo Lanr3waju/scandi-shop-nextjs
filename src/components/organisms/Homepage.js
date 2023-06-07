@@ -30,10 +30,10 @@ export default function Homepage({ store }) {
   return (
     <>
       <header className="mb-6 rounded-br-3xl bg-primary p-6 text-center shadow-sm shadow-overlay ">
-        <h2 className="mb-4 text-5xl md:text-7xl font-bold text-white">
+        <h2 className="mb-4 text-5xl md:text-7xl font-bold text-white font-Raleway">
           Welcome to Scandi-Shop 🎈
         </h2>
-        <h3 className="my-5 text-xl font-bold text-primary-content">
+        <h3 className="my-5 text-xl font-bold text-primary-content font-Inter">
           Shop with us today to get value for your money!
         </h3>
       </header>
