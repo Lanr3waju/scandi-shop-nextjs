@@ -13,7 +13,7 @@ export default function ImageMagnifier({
   const [[imgWidth, imgHeight], setSize] = useState([0, 0])
   const [showMagnifier, setShowMagnifier] = useState(false)
   return (
-    <div
+    <div className="hidden md:block"
       onMouseEnter={(e) => {
         // update image size and turn-on magnifier
         const elem = e.currentTarget
@@ -74,9 +74,8 @@ export default function ImageMagnifier({
           backgroundRepeat: "no-repeat",
 
           //calculate zoomed image size
-          backgroundSize: `${imgWidth * zoomLevel}px ${
-            imgHeight * zoomLevel
-          }px`,
+          backgroundSize: `${imgWidth * zoomLevel}px ${imgHeight * zoomLevel
+            }px`,
 
           //calculate position of zoomed image.
           backgroundPositionX: `${-x * zoomLevel + magnifierWidth / 2}px`,

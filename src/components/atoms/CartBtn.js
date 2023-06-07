@@ -8,9 +8,9 @@ export default function CartBtn() {
 
   return (
     <li className="p-4 transition-all">
-      <Link href="/products/cart">
+      <Link className="flex md:block" href="/products/cart">
         {totalQuantity > 0 && (
-          <div className="absolute right-1 top-4 flex h-4 w-6 items-center justify-center rounded-full bg-secondary p-2 text-xs text-white">
+          <div className="absolute top-20 md:right-1 md:top-4 md:flex h-4 w-6 items-center justify-center rounded-full bg-secondary p-2 text-xs text-white hidden">
             {totalQuantity}
           </div>
         )}
@@ -21,6 +21,7 @@ export default function CartBtn() {
           src="/cart.png"
           width={40}
         />
+        <p className="text-primary text-xl font-semibold ml-2 md:hidden">({totalQuantity} Items)</p>
       </Link>
     </li>
   )
